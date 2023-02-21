@@ -29,7 +29,7 @@
               會員專區
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">@頭像@id</a></li>
+              <li><a class="dropdown-item" href="#">@頭像@{{member_data.ID}}</a></li>
               <li><a class="dropdown-item" href="/memberarea/data"><img style="padding-right: 5px;" src="@/assets/image/gear.svg">個人資料</a></li>
               <li><a class="dropdown-item" href="#"><img style="padding-right: 5px;" src="@/assets/image/box-arrow-left.svg">登出@id</a></li>
             </ul>
@@ -42,8 +42,18 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
-  name: "NavbarLogining"
+  name: "NavbarLogining",
+  created(){
+    this.$store.dispatch('getMemberData')
+  },
+  computed:{
+    ...mapGetters([
+      'member_data'
+    ]),
+  },
 }
 </script>
 

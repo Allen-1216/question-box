@@ -1,6 +1,6 @@
 <template>
   <!--navbar-->
-  <NavbarLogining></NavbarLogining>
+  <NavbarLogin/>
   <!--letterbox-->
   <div class="row" style="margin-top: 100px">
     <div class="col"></div>
@@ -8,8 +8,8 @@
       <h1 class="text-center">收藏的信件</h1>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
         <button type="button" class="btn-close float-end" aria-label="Close"></button>
-        <p>@日期時間 </p>
-        <p>@內容</p>
+        <div>@日期時間</div>
+        <div style="padding-top: 10px;">@內容</div>
 
         <div class="exit_hover float-start" @click="changesvg1()">
           <button class="btn pic1_1" ref="pic1_1" >
@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import NavbarLogining from "@/components/NavbarLogining";
+import NavbarLogin from "@/components/NavbarLogin";
 export default {
   name: "MemberAreaBookmarkPage",
-  components: {NavbarLogining},
+  components: {NavbarLogin},
   data(){
     return{
       svg1 : 0,
@@ -79,9 +79,12 @@ export default {
 .exit_hover .pic1_1{display: inline-block;}
 .exit_hover .pic1_2{display: none;}
 
-
 .exit_hover .pic2_1{display: inline-block;}
 .exit_hover .pic2_2{display: none;}
 .exit_hover:hover .pic2_1{display: none;}
 .exit_hover:hover .pic2_2{display: inline-block;}
+
+*{
+  word-break : break-all
+}
 </style>

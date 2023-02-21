@@ -1,6 +1,6 @@
 <template>
   <!--navbar-->
-  <NavbarLogining></NavbarLogining>
+  <NavbarLogin/>
   <!--letterbox-->
   <div class="row" style="margin-top: 50px">
     <div class="col"></div>
@@ -19,8 +19,8 @@
       </div>
       <!----bs-gutter-x:0;-->
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
-        <span>id : </span>
-        <span>@id</span>
+        <span>id: </span>
+        <span>{{member_data.ID}}</span> <!--id-->
         <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_changeid" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <div class="modal fade" id="exampleModal_changeid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -31,7 +31,7 @@
               </div>
               <div class="modal-body">
                 <form>
-                  <label for="recipient-name" class="col-form-label">請輸入新 id :</label>
+                  <label for="recipient-name" class="col-form-label">請輸入新 id:</label>
                   <input type="text" class="form-control" id="recipient-name">
                 </form>
               </div>
@@ -44,8 +44,8 @@
         </div>
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
-        <span>顯示名稱 : </span>
-        <span>@顯示名稱</span>
+        <span>顯示名稱: </span>
+        <span>{{member_data.NAME}}</span> <!--顯示名稱-->
         <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_changename" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <div class="modal fade" id="exampleModal_changename" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -56,7 +56,7 @@
               </div>
               <div class="modal-body">
                 <form>
-                  <label for="recipient-name" class="col-form-label">請輸入新名稱 :</label>
+                  <label for="recipient-name" class="col-form-label">請輸入新名稱:</label>
                   <input type="text" class="form-control" id="recipient-name">
                 </form>
               </div>
@@ -69,8 +69,8 @@
         </div>
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
-        <span>email : </span>
-        <span>@email</span>
+        <span>email: </span>
+        <span>{{member_data.EMAIL}}</span> <!--顯示email-->
         <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_changeemail" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <div class="modal fade" id="exampleModal_changeemail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -81,7 +81,7 @@
               </div>
               <div class="modal-body">
                 <form>
-                  <label for="recipient-name" class="col-form-label">請輸入新 email :</label>
+                  <label for="recipient-name" class="col-form-label">請輸入新 email:</label>
                   <input type="text" class="form-control" id="recipient-name">
                 </form>
               </div>
@@ -94,8 +94,8 @@
         </div>
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
-        <span>自我介紹 : </span>
-        <span>@自我介紹</span>
+        <span>自我介紹: </span>
+        <span>{{member_data.INTRODUCTION}}</span> <!--自我介紹-->
         <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_Selfintroduction" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <div class="modal fade" id="exampleModal_Selfintroduction" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -106,7 +106,7 @@
               </div>
               <div class="modal-body">
                 <form>
-                  <label for="recipient-name" class="col-form-label">請輸入新自我介紹 :</label>
+                  <label for="recipient-name" class="col-form-label">請輸入新自我介紹:</label>
                   <input type="text" class="form-control" id="recipient-name">
                 </form>
               </div>
@@ -120,7 +120,7 @@
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
         <img src="@/assets/image/link-45deg.svg">
-        <span>我的提問箱鏈結 : </span>
+        <span>我的提問箱鏈結: </span>
         <span>@鏈結</span>
       </div>
     </div>
@@ -129,10 +129,19 @@
 </template>
 
 <script>
-import NavbarLogining from "@/components/NavbarLogining";
+import {mapGetters} from "vuex";
+import NavbarLogin from "@/components/NavbarLogin";
 export default {
+  created(){
+    this.$store.dispatch('getMemberData')
+  },
   name: "MemberAreaData",
-  components: {NavbarLogining}
+  components: {NavbarLogin},
+  computed:{
+    ...mapGetters([
+      'member_data'
+    ])
+  }
 }
 </script>
 
@@ -180,5 +189,8 @@ export default {
   margin-top: 32.5px;
   width: 50px;
   height: 50px;
+}
+*{
+  word-break : break-all
 }
 </style>

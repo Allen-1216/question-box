@@ -15,31 +15,31 @@ const router = createRouter({
             redirect:'/home',
         },
         {
-            path: '/home',
+            path: '/home', //首頁
             component: HomePage,
         },
         {
-            path: '/memberarea',
+            path: '/MemberArea', //會員專區頁面
             component: MemberAreaPage,
         },
         {
-            path: '/memberarea/letterbox',
+            path: '/MemberArea/letterbox', //收到的內容頁面
             component: MemberAreaLetterBoxPage,
         },
         {
-            path: '/memberarea/bookmark',
+            path: '/MemberArea/bookmark', //收藏的內容頁面
             component: MemberAreaBookmarkPage,
         },
         {
-            path: '/memberarea/data',
+            path: '/MemberArea/data', //個人資料頁面
             component: MemberAreaDataPage,
         },
         {
-            path: '/MessageBoardPage',
+            path: '/MessageBoardPage', //提交內容的頁面
             component: MessageBoardPage,
         },
         {
-            path: '/:pathMatch(.*)*',
+            path: '/:pathMatch(.*)*', //找不到頁面
             component: NotFoundPage,
         },
     ],

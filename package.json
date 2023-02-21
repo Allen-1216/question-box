@@ -3,13 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run serve\"",
+    "server": "nodemon server.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "bootstrap-icons": "^1.9.1",
+    "concurrently": "^7.4.0",
     "core-js": "^3.8.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-mysql-session": "^2.1.8",
+    "express-session": "^1.17.3",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.20",
     "vue": "^3.2.13",
     "vue-router": "^4.1.5",
     "vuex": "^4.0.2"
