@@ -6,6 +6,7 @@ import MemberAreaBookmarkPage from "../view/MemberAreaBookmarkPage";
 import MemberAreaDataPage from "../view/MemberAreaDataPage";
 import NotFoundPage from "../view/NotFoundPage";
 import MessageBoardPage from "../view/MessageBoardPage"
+import axios from "axios";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -17,25 +18,30 @@ const router = createRouter({
         {
             path: '/home', //首頁
             component: HomePage,
+            name:'home'
         },
         {
-            path: '/MemberArea', //會員專區頁面
+            path: '/memberarea', //對外資訊頁面
             component: MemberAreaPage,
+            meta: { requiresAuth: true } // 設為需為登入狀態
         },
         {
-            path: '/MemberArea/letterbox', //收到的內容頁面
+            path: '/memberarea/letterbox', //收到的內容頁面
             component: MemberAreaLetterBoxPage,
+            meta: { requiresAuth: true } // 設為需為登入狀態
         },
         {
-            path: '/MemberArea/bookmark', //收藏的內容頁面
+            path: '/memberarea/bookmark', //收藏的內容頁面
             component: MemberAreaBookmarkPage,
+            meta: { requiresAuth: true } // 設為需為登入狀態
         },
         {
-            path: '/MemberArea/data', //個人資料頁面
+            path: '/memberarea/data', //個人資料頁面
             component: MemberAreaDataPage,
+            meta: { requiresAuth: true } // 設為需為登入狀態
         },
         {
-            path: '/MessageBoardPage', //提交內容的頁面
+            path: '/messageboardpage', //提交內容的頁面
             component: MessageBoardPage,
         },
         {
@@ -44,5 +50,22 @@ const router = createRouter({
         },
     ],
 });
+
+//全域設置進入路由之前的時間點
+router.beforeEach((to, from, next) => {
+    // 當路由物件的 meta 設有 requiresAuth 時
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+        axios.get(`/api/user/loginStatus`) //查詢登入狀態
+            .then((response) => {
+                //console.log(response.data.state === "success")
+                if (response.data.state !== "success" && name !== 'home') {
+                    next({path: '/home'}) // 導向登入頁面
+                }else {
+                    next() // 登入成功，則可繼續往下執行
+                }
+            })
+    }else next()
+})
+
 
 export default router;

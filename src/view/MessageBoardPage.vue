@@ -6,10 +6,10 @@
     <div class="col"></div>
     <div class="col-4 text-center shadow border">
       <p>頭像</p> <!--頭像-->
-      <p>{{member_data.NAME}}</p> <!--顯示名稱-->
-      <p>@{{member_data.ID}}</p> <!--id-->
+      <p>{{member_data.name}}</p> <!--顯示名稱-->
+      <p>@{{member_data.account}}</p> <!--id-->
       <p>@logo</p> <!--logo-->
-      <p>{{member_data.INTRODUCTION}}</p> <!--自我介紹-->
+      <p>{{member_data.introduction}}</p> <!--自我介紹-->
     </div>
     <div class="col"></div>
   </div>

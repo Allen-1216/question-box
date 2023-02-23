@@ -2,6 +2,7 @@ import axios from "axios";
 
 const state = {
     content: {},
+
     bookmark_content_time: {},
     bookmark_content: {},
 }
@@ -11,11 +12,11 @@ const mutations = {
     }
 }
 const actions = {
-    getContent (context) {
-        axios.get(`http://localhost:3000/user/12345/letterbox`)
+    async getContent ({commit}) {
+        await axios.get(`/api/user/letterbox`)
             .then((response) => {
-                context.commit('SET_CONTENT', response.data)
-                // console.log(response.data)
+                commit('SET_CONTENT', response.data)
+                //console.log(response.data)
             })
             .catch((error) => console.log(error))
     }

@@ -10,8 +10,9 @@
            style="padding: 15px; margin-bottom: 10px">
         <button type="button" class="btn-close float-end" aria-label="Close"></button>
         <div>#{{ index + 1 }}</div> <!--index-->
-        <div>{{ item.CONTENT_TIME.replace(/T/g,' ').replace(/\.[\d]{3}Z/,'')}}</div> <!--訊息時間-->
-        <div class="paddingTop10">{{ item.CONTENT }}</div> <!--訊息-->
+        <div>@{{ item.sender_account }}</div> <!--寄出人-->
+        <div>{{ item.content_time.replace(/T/g,' ').replace(/\.[\d]{3}Z/,'')}}</div> <!--訊息時間-->
+        <div class="paddingTop10">{{ item.content }}</div> <!--訊息-->
         <div style="padding-top: 10px;"></div>
 
         <div class="exit_hover float-start" @click="changeSvg1()">

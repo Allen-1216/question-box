@@ -13,7 +13,7 @@ const actions = {
         await axios.get(`/api/user`)
             .then((response) => {
                 commit('SET_MEMBER_DATA', response.data)
-                // console.log(response.data)
+                 //console.log(response.data)
             })
             .catch((error) => console.log(error))
     }

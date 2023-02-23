@@ -1,6 +1,6 @@
 <template>
   <!--navbar-->
-  <NavbarNotLogin></NavbarNotLogin>
+  <nav><NavbarNotLogin/></nav>
   <!--image-->
   <div class="mx-auto" style="max-width:400px; max-height:300px; margin-top: 60px">
     <img class="img-fluid img-thumbnail" src="@/assets/image/letters.png" alt="letters">
@@ -18,9 +18,18 @@
 
 <script>
 import NavbarNotLogin from "@/components/NavbarNotLogin";
+// import NavbarLogin from "@/components/NavbarLogin";
 export default {
   name: "HomePage",
-  components: {NavbarNotLogin}
+  components: {NavbarNotLogin},
+  computed:{
+  //   isLogin(){
+  //     return this.$store.dispatch('isLogin');
+  //   }
+   },
+  // created(){
+  //   this.$store.dispatch('isLogin');
+  // },
 }
 </script>
 

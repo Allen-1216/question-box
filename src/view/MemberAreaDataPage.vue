@@ -20,7 +20,7 @@
       <!----bs-gutter-x:0;-->
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
         <span>id: </span>
-        <span>{{member_data.ID}}</span> <!--id-->
+        <span>{{member_data.account}}</span> <!--account-->
         <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_changeid" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <div class="modal fade" id="exampleModal_changeid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -45,7 +45,7 @@
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
         <span>顯示名稱: </span>
-        <span>{{member_data.NAME}}</span> <!--顯示名稱-->
+        <span>{{member_data.name}}</span> <!--顯示名稱-->
         <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_changename" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <div class="modal fade" id="exampleModal_changename" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -70,7 +70,7 @@
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
         <span>email: </span>
-        <span>{{member_data.EMAIL}}</span> <!--顯示email-->
+        <span>{{member_data.email}}</span> <!--顯示email-->
         <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_changeemail" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <div class="modal fade" id="exampleModal_changeemail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -95,7 +95,7 @@
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
         <span>自我介紹: </span>
-        <span>{{member_data.INTRODUCTION}}</span> <!--自我介紹-->
+        <span>{{member_data.introduction}}</span> <!--自我介紹-->
         <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_Selfintroduction" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <div class="modal fade" id="exampleModal_Selfintroduction" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">

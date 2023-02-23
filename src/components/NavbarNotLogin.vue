@@ -1,6 +1,6 @@
 <template>
   <!--navbar-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow row">
+  <div class="navbar navbar-expand-lg navbar-light bg-light shadow row">
     <div class="col-3"></div>
     <div class="container col">
       <a href="/home"><img class="align-text-bottom" src="@/assets/image/envelope.svg"
@@ -84,7 +84,7 @@
       </div>
     </div>
     <div class="col-3"></div>
-  </nav>
+  </div>
 </template>
 
 <script>
@@ -100,9 +100,6 @@ export default {
       user
     }
   },
-  // created(){
-  //   this.$store.dispatch('login')
-  // },
   computed: {},
   methods: {
     login() {
