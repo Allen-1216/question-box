@@ -1,6 +1,7 @@
 <template>
   <!--navbar-->
-  <nav><NavbarNotLogin/></nav>
+  <nav v-if = "is_login"><NavbarLogin/></nav>
+  <nav v-else><NavbarNotLogin/></nav>
   <!--image-->
   <div class="mx-auto" style="max-width:400px; max-height:300px; margin-top: 60px">
     <img class="img-fluid img-thumbnail" src="@/assets/image/letters.png" alt="letters">
@@ -18,18 +19,19 @@
 
 <script>
 import NavbarNotLogin from "@/components/NavbarNotLogin";
-// import NavbarLogin from "@/components/NavbarLogin";
+import NavbarLogin from "@/components/NavbarLogin";
+import {mapGetters} from "vuex";
 export default {
   name: "HomePage",
-  components: {NavbarNotLogin},
+  components: {NavbarNotLogin, NavbarLogin},
+  created(){
+    this.$store.dispatch('isLoggedIn')
+  },
   computed:{
-  //   isLogin(){
-  //     return this.$store.dispatch('isLogin');
-  //   }
-   },
-  // created(){
-  //   this.$store.dispatch('isLogin');
-  // },
+    ...mapGetters([
+      'is_logged_in'
+    ]),
+  },
 }
 </script>
 

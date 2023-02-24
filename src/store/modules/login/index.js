@@ -2,8 +2,14 @@
 import axios from "axios";
 import router from  "@/router"
 
-const state = {}
-const mutations = {}
+const state = {
+    is_logged_in : {}
+}
+const mutations = {
+    IS_LOGGED_IN(state, payload){
+        state.is_login = payload;
+    }
+}
 const actions = {
     async login({commit},user) {
         await axios.post(`/api/login`, {
@@ -34,15 +40,20 @@ const actions = {
         })
             .catch((error) => console.log(error))
     },
-    // async isLogin(){
-    //     await axios.get(`/api/user/loginStatus`)
-    //         .then((response) => {
-    //             //console.log(response.data.state === "success")
-    //             return(response.data.state === "success")
-    //         })
-    // }
+    async isLoggedIn({commit}){
+        await axios.get(`/api/user/loginStatus`)
+            .then((response) => {
+                // console.log("isLogin:", response.data.state === "success")
+                commit('IS_LOGGED_IN', response.data.state === "success")
+                // return(response.data.state === "success")
+            })
+            .catch((error) => console.log(error))
+    }
 }
 const getters = { //store 的 computed
+    is_logged_in(state){
+        return state.is_logged_in;
+    }
 }
 const LoginModule = {
     state,
