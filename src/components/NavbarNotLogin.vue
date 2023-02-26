@@ -65,16 +65,16 @@
                   <div class="modal-body">
                     <form>
                       <label for="recipient-id-signup" class="col-form-label">帳號 :</label>
-                      <input type="text" class="form-control" id="recipient-id-signup">
-                      <label for="recipient-password-signup" class="col-form-label">密碼 :</label>
-                      <input type="text" class="form-control" id="recipient-password-signup">
+                      <input v-model="signup.username" type="text" class="form-control" id="recipient-id-signup">
+                      <label for="recipient-password-signup" class="col-form-label" >密碼 :</label>
+                      <input v-model="signup.password" type="password" class="form-control" id="recipient-password-signup">
                       <label for="recipient-password-signup" class="col-form-label">確認密碼 :</label>
-                      <input type="text" class="form-control" id="recipient-password-signup-confirm">
+                      <input v-model="signup.confirmPassword" type="password" class="form-control" id="recipient-password-signup-confirm">
                     </form>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary">註冊</button>
+                    <button @click="btn_signup()" type="button" class="btn btn-primary">註冊</button>
                   </div>
                 </div>
               </div>
@@ -96,8 +96,13 @@ export default {
       username: "",
       password: "",
     }
+    const signup = {
+      username: "",
+      password: "",
+      confirmPassword: "",
+    }
     return {
-      user
+      user,signup
     }
   },
   computed: {},
@@ -108,6 +113,13 @@ export default {
         password: this.user.password
       }
       return this.$store.dispatch('login', loginDetail);
+    },btn_signup(){
+      const signupDetail = {
+        username: this.signup.username,
+        password: this.signup.password,
+        confirmPassword: this.signup.confirmPassword,
+      }
+      return this.$store.dispatch('signup', signupDetail);
     }
   }
 }

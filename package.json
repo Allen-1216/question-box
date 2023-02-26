@@ -1,6 +1,6 @@
 {
   "name": "20220629_question_box",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run serve\"",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "bcrypt": "^5.1.0",
     "bootstrap-icons": "^1.9.1",
     "browserify-zlib": "^0.2.0",
     "concurrently": "^7.4.0",
@@ -23,6 +24,7 @@
     "node-polyfill-webpack-plugin": "^2.0.1",
     "nodemon": "^2.0.20",
     "path": "^0.12.7",
+    "validator": "^13.9.0",
     "vue": "^3.2.13",
     "vue-router": "^4.1.5",
     "vuex": "^4.0.2"
@@ -30,11 +32,15 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "husky": "^8.0.3",
     "webpack-node-externals": "^3.0.0"
   },
   "eslintConfig": {
@@ -56,5 +62,10 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }

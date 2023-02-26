@@ -48,7 +48,22 @@ const actions = {
                 // return(response.data.state === "success")
             })
             .catch((error) => console.log(error))
-    }
+    },
+    async signup({commit}, user) {
+        await axios.post(`/api/signup`, {
+            username: user.username,
+            password: user.password,
+            confirmPassword: user.confirmPassword,
+        }).then((response) => {
+            if(response.data.state === "success"){
+                alert(response.data.message)
+            }
+            else{
+                alert(response.data.message)
+            }
+        })
+            .catch((error) => console.log(error))
+    },
 }
 const getters = { //store 的 computed
     is_logged_in(state){
