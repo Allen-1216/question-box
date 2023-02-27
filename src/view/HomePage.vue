@@ -1,6 +1,6 @@
 <template>
   <!--navbar-->
-  <nav v-if = "is_login"><NavbarLogin/></nav>
+  <nav v-if = "is_logged_in"><NavbarLogin/></nav>
   <nav v-else><NavbarNotLogin/></nav>
   <!--image-->
   <div class="mx-auto" style="max-width:400px; max-height:300px; margin-top: 60px">

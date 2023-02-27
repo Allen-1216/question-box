@@ -48,7 +48,7 @@
 import {mapGetters} from "vuex";
 
 export default {
-  name: "NavbarLogining",
+  name: "NavbarLogin",
   created(){
     this.$store.dispatch('getMemberData')
   },
@@ -59,7 +59,7 @@ export default {
   },
   methods:{
     logout(){
-      return this.$store.dispatch('logout');
+      return this.$store.dispatch('logOut');
     }
   }
 }

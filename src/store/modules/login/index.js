@@ -7,11 +7,11 @@ const state = {
 }
 const mutations = {
     IS_LOGGED_IN(state, payload){
-        state.is_login = payload;
+        state.is_logged_in = payload;
     }
 }
 const actions = {
-    async login({commit},user) {
+    async logIn({commit},user) {
         await axios.post(`/api/login`, {
             username: user.username,
             password: user.password,
@@ -28,11 +28,12 @@ const actions = {
         })
             .catch((error) => console.log(error))
     },
-    async logout(){
+    async logOut(){
         await axios.post(`/api/logout`)
             .then((response) => {
             if(response.data.state === "success"){
                 router.push('/home')
+                history.go(0)
             }
             else{
                 alert(response.data.message)
@@ -49,7 +50,7 @@ const actions = {
             })
             .catch((error) => console.log(error))
     },
-    async signup({commit}, user) {
+    async signUp({commit}, user) {
         await axios.post(`/api/signup`, {
             username: user.username,
             password: user.password,

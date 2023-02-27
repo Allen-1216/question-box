@@ -35,14 +35,14 @@
                   <div class="modal-body">
                     <form>
                       <label for="recipient-id-login" class="col-form-label">請輸入帳號 :</label>
-                      <input v-model="user.username" type="text" class="form-control" id="recipient-id-login">
+                      <input v-model="login.username" type="text" class="form-control" id="recipient-id-login">
                       <label for="recipient-password" class="col-form-label">請輸入密碼 :</label>
-                      <input v-model="user.password" type="password" class="form-control" id="recipient-password">
+                      <input v-model="login.password" type="password" class="form-control" id="recipient-password">
                     </form>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                    <button @click="login()" type="button" class="btn btn-primary">登入</button>
+                    <button @click="btn_login()" type="button" class="btn btn-primary">登入</button>
                   </div>
                 </div>
               </div>
@@ -92,7 +92,7 @@
 export default {
   name: "NavbarNotLogin",
   data() {
-    const user = {
+    const login = {
       username: "",
       password: "",
     }
@@ -102,24 +102,24 @@ export default {
       confirmPassword: "",
     }
     return {
-      user,signup
+      login,signup
     }
   },
   computed: {},
   methods: {
-    login() {
+    btn_login() {
       const loginDetail = {
-        username: this.user.username,
-        password: this.user.password
+        username: this.login.username,
+        password: this.login.password
       }
-      return this.$store.dispatch('login', loginDetail);
+      return this.$store.dispatch('logIn', loginDetail);
     },btn_signup(){
       const signupDetail = {
         username: this.signup.username,
         password: this.signup.password,
         confirmPassword: this.signup.confirmPassword,
       }
-      return this.$store.dispatch('signup', signupDetail);
+      return this.$store.dispatch('signUp', signupDetail);
     }
   }
 }
