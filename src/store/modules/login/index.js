@@ -32,8 +32,12 @@ const actions = {
         await axios.post(`/api/logout`)
             .then((response) => {
             if(response.data.state === "success"){
-                router.push('/home')
-                history.go(0)
+                let url = location.href;
+                if(url.includes('/home')){
+                    history.go(0)
+                }else{
+                    router.push('/home')
+                }
             }
             else{
                 alert(response.data.message)
