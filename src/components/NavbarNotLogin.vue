@@ -34,7 +34,7 @@
                   </div>
                   <div class="modal-body">
                     <form>
-                      <label for="recipient-id-login" class="col-form-label">請輸入帳號 :</label>
+                      <label for="recipient-id-login" class="col-form-label">請輸入帳號(不分大小寫) :</label>
                       <input v-model="login.username" type="text" class="form-control" id="recipient-id-login">
                       <label for="recipient-password" class="col-form-label">請輸入密碼 :</label>
                       <input v-model="login.password" type="password" class="form-control" id="recipient-password">

@@ -62,6 +62,7 @@ const actions = {
         }).then((response) => {
             if(response.data.state === "success"){
                 alert(response.data.message)
+                location.reload();
             }
             else{
                 alert(response.data.message)
