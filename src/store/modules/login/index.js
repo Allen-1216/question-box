@@ -11,7 +11,7 @@ const mutations = {
     }
 }
 const actions = {
-    async logIn({commit},user) {
+    async logIn({commit}, user) {
         await axios.post(`/api/login`, {
             username: user.username,
             password: user.password,

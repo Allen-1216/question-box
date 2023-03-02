@@ -57,12 +57,12 @@
               <div class="modal-body">
                 <form>
                   <label for="recipient-name" class="col-form-label">請輸入新名稱:</label>
-                  <input type="text" class="form-control" id="recipient-name">
+                  <input v-model="user.name" type="text" class="form-control" id="recipient-name">
                 </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">儲存</button>
+                <button @click="btn_chgAreaData()" type="button" class="btn btn-primary">儲存</button>
               </div>
             </div>
           </div>
@@ -82,12 +82,12 @@
               <div class="modal-body">
                 <form>
                   <label for="recipient-name" class="col-form-label">請輸入新 email:</label>
-                  <input type="text" class="form-control" id="recipient-name">
+                  <input v-model="user.email" type="text" class="form-control" id="recipient-name">
                 </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">儲存</button>
+                <button @click="btn_chgAreaData()" type="button" class="btn btn-primary">儲存</button>
               </div>
             </div>
           </div>
@@ -107,12 +107,12 @@
               <div class="modal-body">
                 <form>
                   <label for="recipient-name" class="col-form-label">請輸入新自我介紹:</label>
-                  <input type="text" class="form-control" id="recipient-name">
+                  <input v-model="user.introduction" type="text" class="form-control" id="recipient-name">
                 </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">儲存</button>
+                <button @click="btn_chgAreaData()" type="button" class="btn btn-primary">儲存</button>
               </div>
             </div>
           </div>
@@ -132,6 +132,17 @@
 import {mapGetters} from "vuex";
 import NavbarLogin from "@/components/NavbarLogin";
 export default {
+  data() {
+    const user = {
+      // account: "",
+      name: "",
+      email: "",
+      introduction: ""
+    }
+    return{
+      user
+    }
+  },
   created(){
     this.$store.dispatch('getMemberData')
   },
@@ -141,6 +152,16 @@ export default {
     ...mapGetters([
       'member_data'
     ])
+  },
+  methods: {
+    btn_chgAreaData(){
+      const newData = {
+        name: this.user.name,
+        email: this.user.email,
+        introduction: this.user.introduction
+      }
+      return this.$store.dispatch('chgAreaData', newData);
+    }
   }
 }
 </script>
