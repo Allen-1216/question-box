@@ -48,7 +48,7 @@ const actions = {
     async isLoggedIn({commit}){
         await axios.get(`/api/user/loginStatus`)
             .then((response) => {
-                // console.log("isLogin:", response.data.state === "success")
+                // console.log("isLogin:", response.data.state)
                 commit('IS_LOGGED_IN', response.data.state === "success")
                 // return(response.data.state === "success")
             })

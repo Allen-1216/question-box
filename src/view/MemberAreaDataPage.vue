@@ -121,7 +121,8 @@
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
         <img src="@/assets/image/link-45deg.svg">
         <span>我的提問箱鏈結: </span>
-        <span>@鏈結</span>
+<!--        <br/>-->
+        <a :href="'http://localhost:8080/messageboardpage/' + member_data.account" class="link-dark" target="_blank">http://localhost:8080/messageboardpage/{{member_data.account}}</a>
       </div>
     </div>
     <div class="col"></div>
@@ -161,6 +162,9 @@ export default {
         introduction: this.user.introduction
       }
       return this.$store.dispatch('chgAreaData', newData);
+    },
+    btn_redirectToMessageBoardPage(){
+      window.location.href = 'http://localhost:8080/messageboardpage/' + this.member_data.account;
     }
   }
 }
