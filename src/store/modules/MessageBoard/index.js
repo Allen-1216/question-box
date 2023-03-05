@@ -24,6 +24,21 @@ const actions = {
                 .catch((error) => console.log(error))
         }
     },
+    async addContent(commit, contentDetail){
+        await axios.post('/api/user/letterbox',{
+            account: contentDetail.account,
+            content: contentDetail.input,
+            sender_name: contentDetail.sender_name,
+        }).then((response) => {
+            if(response.data.state === "success"){
+                alert(response.data.message)
+            }
+            else{
+                alert(response.data.message)
+            }
+        })
+            .catch((error) => console.log(error))
+    }
 }
 const getters = {
     message_board_data(state){

@@ -9,9 +9,10 @@
       <div v-for="(item, index) in content" :key="index" class="border border-2 rounded-3"
            style="padding: 15px; margin-bottom: 10px">
         <button type="button" class="btn-close float-end" aria-label="Close"></button>
-        <div>#{{ index + 1 }}</div> <!--index-->
-        <div>@{{ item.sender_account }}</div> <!--寄出人-->
-        <div>{{ item.content_time.replace(/T/g,' ').replace(/\.[\d]{3}Z/,'')}}</div> <!--訊息時間-->
+        <div class="text-secondary paddingBot10">#{{ index + 1 }}</div> <!--index-->
+        <span>{{ item.sender_name }}</span> <!--寄出人name-->
+        <span class="text-secondary">&nbsp;@{{ item.sender_account }}</span> <!--寄出人account-->
+        <div class="text-secondary float-end">{{ item.content_time.replace(/T/g,' ').replace(/\.[\d]{3}Z/,'')}}</div> <!--訊息時間-->
         <div class="paddingTop10">{{ item.content }}</div> <!--訊息-->
         <div style="padding-top: 10px;"></div>
 
@@ -124,6 +125,10 @@ export default {
 
 .paddingTop10{
   padding-top: 10px;
+}
+
+.paddingBot10{
+  padding-bottom: 10px;
 }
 
 * {

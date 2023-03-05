@@ -22,26 +22,26 @@
         <span>id: </span>
         <span>{{member_data.account}}</span> <!--account-->
         <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_changeid" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
-        <div class="modal fade" id="exampleModal_changeid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">更改 id</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <label for="recipient-name" class="col-form-label">請輸入新 id:</label>
-                  <input type="text" class="form-control" id="recipient-name">
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">儲存</button>
-              </div>
-            </div>
-          </div>
-        </div>
+<!--        <div class="modal fade" id="exampleModal_changeid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">更改 id</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                <form>-->
+<!--                  <label for="recipient-name" class="col-form-label">請輸入新 id:</label>-->
+<!--                  <input type="text" class="form-control" id="recipient-name">-->
+<!--                </form>-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>-->
+<!--                <button type="button" class="btn btn-primary">儲存</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
         <span>顯示名稱: </span>
@@ -121,7 +121,6 @@
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
         <img src="@/assets/image/link-45deg.svg">
         <span>我的提問箱鏈結: </span>
-<!--        <br/>-->
         <a :href="'http://localhost:8080/messageboardpage/' + member_data.account" class="link-dark" target="_blank">http://localhost:8080/messageboardpage/{{member_data.account}}</a>
       </div>
     </div>
@@ -163,9 +162,6 @@ export default {
       }
       return this.$store.dispatch('chgAreaData', newData);
     },
-    btn_redirectToMessageBoardPage(){
-      window.location.href = 'http://localhost:8080/messageboardpage/' + this.member_data.account;
-    }
   }
 }
 </script>

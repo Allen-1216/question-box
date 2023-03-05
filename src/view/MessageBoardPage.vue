@@ -17,8 +17,8 @@
     <div class="col"></div>
     <div class="col-4 border">
       <h5 style="padding: 10px 0px 5px 0px; color:darkgray;">在這裡填入你的問題</h5>
-      <textarea v-model="input" @keyup.enter="monitorEnterKey" class="form-control" aria-label="With textarea"></textarea>
-      <div style="padding: 10px 0px 10px 0px;" class="text-center" @click="monitorEnterKey" ><button type="button" class="btn btn-secondary">送出</button></div>
+      <textarea v-model="input" @keyup.enter="btn_send()" class="form-control" aria-label="With textarea"></textarea>
+      <div style="padding: 10px 0px 10px 0px;" class="text-center" @click="btn_send()" ><button type="button" class="btn btn-secondary">送出</button></div>
     </div>
     <div class="col"></div>
   </div>
@@ -29,7 +29,6 @@
     </div>
     <div class="col"></div>
   </div>
-
 </template>
 
 <script>
@@ -44,17 +43,23 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("getMessageBoardData")
+    this.$store.dispatch('getMessageBoardData');
+    this.$store.dispatch('getMemberData');
   },
   methods:{
-    monitorEnterKey(){
-      this.$store.dispatch('addNote', this.input)
+    btn_send(){
+      const contentDetail = {
+        account: this.message_board_data.account,
+        input: this.input,
+        sender_name: this.member_data.name,
+      }
+      this.$store.dispatch('addContent', contentDetail);
       this.input = ''; // set input field back to blank
     }
   },
   computed:{
     ...mapGetters([
-      'message_board_data'
+      'message_board_data','member_data'
     ]),
   },
 }
