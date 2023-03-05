@@ -1,6 +1,7 @@
 <template>
   <!--navbar-->
-  <NavbarNotLogin/>
+  <nav v-if = "is_logged_in"><NavbarLogin/></nav>
+  <nav v-else><NavbarNotLogin/></nav>
   <!--text box-->
   <div class="row" style="margin-top: 100px">
     <div class="col"></div>
@@ -33,16 +34,18 @@
 
 <script>
 import {mapGetters} from "vuex";
+import NavbarLogin from "@/components/NavbarLogin";
 import NavbarNotLogin from "@/components/NavbarNotLogin";
 export default {
   name: "message_board",
-  components: {NavbarNotLogin},
+  components: {NavbarNotLogin, NavbarLogin},
   data(){
     return{
       input : '',
     }
   },
   created() {
+    this.$store.dispatch('isLoggedIn');
     this.$store.dispatch('getMessageBoardData');
     this.$store.dispatch('getMemberData');
   },
@@ -59,7 +62,7 @@ export default {
   },
   computed:{
     ...mapGetters([
-      'message_board_data','member_data'
+      'message_board_data', 'member_data', 'is_logged_in'
     ]),
   },
 }
