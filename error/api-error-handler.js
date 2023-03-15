@@ -9,6 +9,10 @@ function apiErrorHandler (err, req, res, next) {
         res.status(err.code).json(err.message);
         return;
     }
+    if(err.status === 404){
+        res.status(404).json('API not found');
+        return;
+    }
     res.status(500).json('something went wrong')
 }
 
