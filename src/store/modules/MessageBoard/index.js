@@ -24,7 +24,8 @@ const actions = {
                 .catch((error) => console.log(error))
         }
     },
-    async addContent(commit, contentDetail){
+    //eslint-disable-next-line
+    async addContent({commit}, contentDetail){
         await axios.post('/api/user/letterbox',{
             account: contentDetail.account,
             content: contentDetail.input,

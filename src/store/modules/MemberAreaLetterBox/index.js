@@ -2,8 +2,6 @@ import axios from "axios";
 
 const state = {
     content: {},
-
-    bookmark_content_time: {},
     bookmark_content: {},
 }
 const mutations = {
@@ -19,7 +17,21 @@ const actions = {
                 //console.log(response.data)
             })
             .catch((error) => console.log(error))
-    }
+    },
+    //eslint-disable-next-line
+    async deleteContent({commit}, mid) {
+        await axios.delete(`/api/user/letterbox`,{data:{
+            mid: mid,
+        }}).then((response) => {
+            if(response.data.state === "success"){
+                location.reload();
+            }
+            else{
+                alert(response.data.message)
+            }
+        })
+            .catch((error) => console.log(error))
+    },
 }
 const getters = {
     content(state){
