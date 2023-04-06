@@ -35,23 +35,27 @@
         <div style="padding-top: 10px;"></div>
 
         <div class="exit_hover float-start">
+          <!--儲存內容-->
           <button class="btn"
                   @mouseover="pic1Visible[index] = true"
-                  @mouseleave="!pic1isClicking && (pic1Visible[index] = false)"
-                  @click="togglePic1Visible(index)">
+                  @mouseleave="(!pic1isClicking[index]) && (pic1Visible[index] = false)"
+                  @click="togglePic1Visible(index);
+                  btn_add_bookmark(item.account, item.mid)">
             <img src="@/assets/image/bookmark.svg" v-if="!pic1Visible[index]">
             <img src="@/assets/image/bookmark-fill.svg" v-if="pic1Visible[index]">
           </button>
         </div>
         <div class="exit_hover float-start">
+          <!--檢舉內容-->
           <button class="btn"
                   @mouseover="pic2Visible[index] = true"
-                  @mouseleave="!pic2isClicking && (pic2Visible[index] = false)"
+                  @mouseleave="(!pic2isClicking[index]) && (pic2Visible[index] = false)"
                   @click="togglePic2Visible(index)">
             <img src="@/assets/image/exclamation-triangle.svg" v-if="!pic2Visible[index]">
             <img src="@/assets/image/exclamation-triangle-fill.svg" v-if="pic2Visible[index]">
           </button>
         </div>
+        <!--放大檢視內容-->
         <button type="button" class="btn float-end" disabled><img style="margin: 0;"
                                                          src="@/assets/image/arrows-angle-expand.svg"></button>
       </div>
@@ -71,32 +75,41 @@ export default {
     return {
       pic1Visible: [],
       pic2Visible: [],
-      pic1isClicking: false,
-      pic2isClicking: false,
+      pic1isClicking: [],
+      pic2isClicking: [],
     }
   },
   methods: {
     togglePic1Visible(index) {
-      if (this.pic1isClicking) {  // 如果已經點擊過一次
+      if (this.pic1isClicking[index]) {  // 如果已經點擊過一次
         this.pic1Visible[index] = !this.pic1Visible[index];  // 切換回原本的圖片
-        this.pic1isClicking = false;  // 重置點擊狀態
-      } else {
-        this.pic1isClicking = true;  // 開始點擊
-        this.pic1Visible[index] = true;  // 切換成另一個圖片
+        this.pic1isClicking[index] = false;  // 重置點擊狀態
+      } else{
+        this.pic1isClicking[index] = true;  // 開始點擊
+        this.pic1Visible[index] = !this.pic1Visible[index];  // 切換成另一個圖片
       }
     },
     togglePic2Visible(index) {
-      if (this.pic2isClicking) {  // 如果已經點擊過一次
+      if (this.pic2isClicking[index]) {  // 如果已經點擊
         this.pic2Visible[index] = !this.pic2Visible[index];  // 切換回原本的圖片
-        this.pic2isClicking = false;  // 重置點擊狀態
+        this.pic2isClicking[index] = false;  // 重置點擊狀態
       } else {
-        this.pic2isClicking = true;  // 開始點擊
-        this.pic2Visible[index] = true;  // 切換成另一個圖片
+        this.pic2isClicking[index] = true;  // 開始點擊
+        this.pic2Visible[index] = !this.pic2Visible[index];  // 切換成另一個圖片
       }
     },
     btn_deleteContent(mid){
       return this.$store.dispatch('deleteContent', mid);
-    }
+    },
+    btn_add_bookmark(account,mid){
+      if(this.pic1isClicking) {
+        const bookmarkDetail = {
+          account: account,
+          article_id: mid
+        }
+        this.$store.dispatch('addBookmarkContent', bookmarkDetail);
+      }
+      }
   },
   created() {
     this.$store.dispatch('getContent');

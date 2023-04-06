@@ -2,7 +2,6 @@ import axios from "axios";
 
 const state = {
     content: {},
-    bookmark_content: {},
 }
 const mutations = {
     SET_CONTENT(state, payload){
@@ -32,6 +31,21 @@ const actions = {
         })
             .catch((error) => console.log(error))
     },
+    //eslint-disable-next-line
+    async addBookmarkContent({commit}, bookmarkContentDetail){
+        await axios.post('/api/user/bookmark',{
+            account: bookmarkContentDetail.account,
+            article_id: bookmarkContentDetail.article_id,
+        }).then((response) => {
+            if(response.data.state === "success"){
+                alert(response.data.message)
+            }
+            else{
+                alert(response.data.message)
+            }
+        })
+            .catch((error) => console.log(error))
+    }
 }
 const getters = {
     content(state){
