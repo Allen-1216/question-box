@@ -18,7 +18,7 @@
     <div class="col"></div>
     <div class="col-4 border">
       <h5 style="padding: 10px 0px 5px 0px; color:darkgray;">在這裡填入你的問題</h5>
-      <textarea v-model="input" @keyup.enter="btn_send()" class="form-control" aria-label="With textarea"></textarea>
+      <textarea v-model="input" class="form-control" aria-label="With textarea"></textarea>
       <div style="padding: 10px 0px 10px 0px;" class="text-center" @click="btn_send()" ><button type="button" class="btn btn-secondary">送出</button></div>
     </div>
     <div class="col"></div>

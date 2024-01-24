@@ -9,7 +9,7 @@
       <div v-for="(item, index) in bookmark_content" :key="index" class="border border-2 rounded-3"
            style="padding: 15px; margin-bottom: 10px">
         <button type="button" class="btn-close float-end" aria-label="Close" style="box-shadow: none;" data-bs-toggle="modal" :data-bs-target="'#exampleModal-' + index"></button>
-         Modal
+         <!-- Modal -->
                   <div class="modal fade" :id="'exampleModal-' + index" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -27,11 +27,11 @@
                       </div>
                     </div>
                   </div>
-        <div class="text-secondary paddingBot10">#{{ index + 1 }}</div> <!--index-->
+        <div class="text-secondary paddingbot">#{{ index + 1 }}</div> <!--index-->
         <span>{{ item.sender_name }}</span> <!--寄出人name-->
         <span class="text-secondary">&nbsp;@{{ item.sender_account }}</span> <!--寄出人account-->
         <div class="text-secondary float-end">{{ item.content_time.replace(/T/g,' ').replace(/\.[\d]{3}Z/,'')}}</div> <!--訊息時間-->
-        <div class="paddingTop10">{{ item.content }}</div> <!--訊息-->
+        <div class="paddingtop text-newline">{{ item.content }}</div> <!--訊息-->
         <div style="padding-top: 10px;"></div>
 
         <!--放大檢視內容-->
@@ -68,7 +68,16 @@ export default {
 </script>
 
 <style scoped>
+.paddingtop {
+  padding-top: 10px;
+}
+.paddingbot {
+  padding-bottom: 10px;
+}
 *{
   word-break : break-all
+}
+.text-newline{
+  white-space : pre-wrap; /*讀取時將\n換行*/
 }
 </style>

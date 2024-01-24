@@ -9,7 +9,7 @@
       <p>{{member_data.name}}</p> <!--名稱-->
       <p>@{{member_data.account}}</p> <!--id-->
       <p>{{member_data.email}}</p> <!--email-->
-      <p>{{member_data.introduction}}</p> <!--自我介紹-->
+      <p class="text-newline">{{member_data.introduction}}</p> <!--自我介紹-->
     </div>
     <div class="col"></div>
   </div>
@@ -36,5 +36,8 @@ export default {
 <style scoped>
 *{
   word-break : break-all;  /*內容超出時換行*/
+}
+.text-newline{
+  white-space : pre-wrap; /*讀取時將\n換行*/
 }
 </style>

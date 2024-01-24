@@ -21,7 +21,7 @@
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
         <span>id: </span>
         <span>{{member_data.account}}</span> <!--account-->
-        <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_changeid" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
+        <img class="float-end btn pe-none" data-bs-toggle="modal" data-bs-target="#exampleModal_changeid" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
 <!--        <div class="modal fade" id="exampleModal_changeid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
 <!--          <div class="modal-dialog">-->
 <!--            <div class="modal-content">-->
@@ -82,7 +82,7 @@
               <div class="modal-body">
                 <form>
                   <label for="recipient-name" class="col-form-label">請輸入新 email:</label>
-                  <input v-model="user.email" type="text" class="form-control" id="recipient-name">
+                  <input v-model="user.email" type="email" class="form-control" id="recipient-name" placeholder="name@gmail.com">
                 </form>
               </div>
               <div class="modal-footer">
@@ -95,7 +95,7 @@
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
         <span>自我介紹: </span>
-        <span>{{member_data.introduction}}</span> <!--自我介紹-->
+        <span class="text-newline">{{member_data.introduction}}</span> <!--自我介紹-->
         <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_Selfintroduction" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <div class="modal fade" id="exampleModal_Selfintroduction" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -107,7 +107,7 @@
               <div class="modal-body">
                 <form>
                   <label for="recipient-name" class="col-form-label">請輸入新自我介紹:</label>
-                  <input v-model="user.introduction" type="text" class="form-control" id="recipient-name">
+                  <textarea v-model="user.introduction" type="text" class="form-control" id="recipient-name"></textarea>
                 </form>
               </div>
               <div class="modal-footer">
@@ -213,5 +213,8 @@ export default {
 }
 *{
   word-break : break-all
+}
+.text-newline{
+  white-space : pre-wrap; /*讀取時將\n換行*/
 }
 </style>

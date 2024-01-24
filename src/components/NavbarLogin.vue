@@ -32,7 +32,7 @@
               會員專區
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">@頭像{{member_data.name}}</a></li>
+              <li><a class="dropdown-item pe-none" href="#">@頭像 {{member_data.name}}</a></li>
               <li><a class="dropdown-item" href="/memberarea/data"><img style="padding-right: 5px;" src="@/assets/image/gear.svg">個人資料</a></li>
               <li><a @click="logout()" class="dropdown-item" href="#"><img style="padding-right: 5px;" src="@/assets/image/box-arrow-left.svg">登出{{member_data.name}}</a></li>
             </ul>

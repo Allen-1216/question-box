@@ -27,11 +27,11 @@
             </div>
           </div>
         </div>
-        <div class="text-secondary paddingBot10">#{{ index + 1 }}</div> <!--index-->
+        <div class="text-secondary paddingbot">#{{ index + 1 }}</div> <!--index-->
         <span>{{ item.sender_name }}</span> <!--寄出人name-->
         <span class="text-secondary">&nbsp;@{{ item.sender_account }}</span> <!--寄出人account-->
         <div class="text-secondary float-end">{{ item.content_time.replace(/T/g,' ').replace(/\.[\d]{3}Z/,'')}}</div> <!--訊息時間-->
-        <div class="paddingTop10">{{ item.content }}</div> <!--訊息-->
+        <div class="paddingtop text-newline">{{ item.content }}</div> <!--訊息-->
         <div style="padding-top: 10px;"></div>
 
         <div class="exit_hover float-start">
@@ -125,10 +125,10 @@ export default {
 </script>
 
 <style scoped>
-.paddingTop10 {
+.paddingtop {
   padding-top: 10px;
 }
-.paddingBot10 {
+.paddingbot {
   padding-bottom: 10px;
 }
 * {
@@ -136,5 +136,8 @@ export default {
 }
 .btn:focus {
   box-shadow: none;
+}
+.text-newline{
+  white-space : pre-wrap; /*讀取時將\n換行*/
 }
 </style>
