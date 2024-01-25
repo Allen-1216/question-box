@@ -19,9 +19,9 @@
       </div>
       <!----bs-gutter-x:0;-->
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
+        <img style="opacity: 0.3;" class="float-end btn pe-none" data-bs-toggle="modal" data-bs-target="#exampleModal_changeid" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <span>id: </span>
         <span>{{member_data.account}}</span> <!--account-->
-        <img class="float-end btn pe-none" data-bs-toggle="modal" data-bs-target="#exampleModal_changeid" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
 <!--        <div class="modal fade" id="exampleModal_changeid" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
 <!--          <div class="modal-dialog">-->
 <!--            <div class="modal-content">-->
@@ -44,9 +44,9 @@
 <!--        </div>-->
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
+        <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_changename" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <span>顯示名稱: </span>
         <span>{{member_data.name}}</span> <!--顯示名稱-->
-        <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_changename" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <div class="modal fade" id="exampleModal_changename" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -69,9 +69,9 @@
         </div>
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
+        <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_changeemail" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <span>email: </span>
         <span>{{member_data.email}}</span> <!--顯示email-->
-        <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_changeemail" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <div class="modal fade" id="exampleModal_changeemail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -82,11 +82,12 @@
               <div class="modal-body">
                 <form>
                   <label for="recipient-name" class="col-form-label">請輸入新 email:</label>
-                  <input v-model="user.email" type="email" class="form-control" id="recipient-name" placeholder="name@gmail.com">
+                  <input v-model="user.email" @input="validateEmail" type="email" class="form-control" id="recipient-name" placeholder="name@gmail.com">
+                  <div v-if="emailValidationMessage" class="email-verify-message">{{ emailValidationMessage }}</div>
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button @click="clearEmailForm()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                 <button @click="btn_chgAreaData()" type="button" class="btn btn-primary">儲存</button>
               </div>
             </div>
@@ -94,9 +95,9 @@
         </div>
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
+        <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_Selfintroduction" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <span>自我介紹: </span>
         <span class="text-newline">{{member_data.introduction}}</span> <!--自我介紹-->
-        <img class="float-end btn" data-bs-toggle="modal" data-bs-target="#exampleModal_Selfintroduction" data-bs-whatever="@id" src="@/assets/image/pencil-square.svg">
         <div class="modal fade" id="exampleModal_Selfintroduction" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -119,9 +120,12 @@
         </div>
       </div>
       <div class="border border-2 rounded-3" style="padding: 15px; margin-bottom: 10px">
-        <img src="@/assets/image/link-45deg.svg">
-        <span>我的提問箱鏈結: </span>
-        <a :href="'http://localhost:8080/messageboardpage/' + member_data.account" class="link-dark" target="_blank">http://localhost:8080/messageboardpage/{{member_data.account}}</a>
+        <span @click="copyText()" class="copy-url-tips" tabindex="0">
+          <span>我的提問箱鏈結: </span>
+          <img class="copy-url-img" src="@/assets/image/link-45deg.svg">
+        </span>
+        <br>
+        <a id="CopyUrl" :href="'http://localhost:8080/messageboardpage/' + member_data.account" class="link-dark" target="_blank">http://localhost:8080/messageboardpage/{{member_data.account}}</a>
       </div>
     </div>
     <div class="col"></div>
@@ -137,7 +141,8 @@ export default {
       // account: "",
       name: "",
       email: "",
-      introduction: ""
+      introduction: "",
+      emailValidationMessage: ""
     }
     return{
       user
@@ -155,18 +160,45 @@ export default {
   },
   methods: {
     btn_chgAreaData(){
-      const newData = {
-        name: this.user.name,
-        email: this.user.email,
-        introduction: this.user.introduction
+      if (this.validateEmail()) {
+        //console.log('email格式通過驗證');
+        const newData = {
+          name: this.user.name,
+          email: this.user.email,
+          introduction: this.user.introduction
+        }
+        return this.$store.dispatch('chgAreaData', newData);
       }
-      return this.$store.dispatch('chgAreaData', newData);
+    },
+    copyText(){
+      let copyText = document.getElementById("CopyUrl").textContent;
+      navigator.clipboard.writeText(copyText)
+    },
+    validateEmail() { //即時驗證email
+      //eslint-disable-next-line
+      const emailRegex = /[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*/;
+      if (!emailRegex.test(this.user.email)) {
+        this.emailValidationMessage = '請輸入有效的電子信箱';
+        return false;
+      } else {
+        this.emailValidationMessage = '';
+        return true;
+      }
+    },
+    clearEmailForm() {
+      setTimeout(() => {
+        this.user.email = '';
+        this.emailValidationMessage = '';
+      }, 100);
     },
   }
 }
 </script>
 
 <style scoped>
+.email-verify-message{
+  color: rgba(216, 77, 77, 0.844);
+}
 .personal-image {
   text-align: center;
 }
@@ -212,9 +244,29 @@ export default {
   height: 50px;
 }
 *{
-  word-break : break-all
+  word-break : break-all /*文字超出容器時自動換行*/
 }
 .text-newline{
-  white-space : pre-wrap; /*讀取時將\n換行*/
+  white-space : pre-wrap; /*顯示時將\n換行*/
+}
+.copy-url-img{
+  display: none; /*預設隱藏 */
+}
+span:hover + .copy-url-img{
+  display: inline; /*懸停時顯示 */
+}
+.copy-url-tips{
+position: relative;
+}
+.copy-url-tips:focus::before{
+position: absolute;
+top: -30px;
+left: 16px;
+color: #fff;
+font-size: .8em;
+background: #666a6a;
+padding: 5px;
+border-radius: 5px;
+content: '已複製連結';
 }
 </style>

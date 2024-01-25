@@ -36,6 +36,7 @@ const actions = {
             }
             else{
                 alert(response.data.message)
+                window.location.reload();
             }
         })
             .catch((error) => console.log(error))
