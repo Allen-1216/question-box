@@ -8,9 +8,10 @@
       <h1 class="text-center">個人資料</h1>
       <div class="personal-image">
         <label class="label">
-          <input type="file" accept="image/*"/>
+          <input type="file" @change="chgAvatarData" accept="image/*"/>
           <figure class="personal-figure">
-            <img src="@/assets/image/card-image.svg" class="personal-avatar" alt="avatar">
+            <img v-if = member_data.avatar class="personal-avatar" alt="avatar" :src="member_data.avatar">
+            <img v-else src="@/assets/image/card-image.svg" class="personal-avatar" alt="avatar">
             <figcaption class="personal-figcaption">
               <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
             </figcaption>
@@ -142,7 +143,8 @@ export default {
       name: "",
       email: "",
       introduction: "",
-      emailValidationMessage: ""
+      avatar: "",
+      emailValidationMessage: "",
     }
     return{
       user
@@ -171,10 +173,24 @@ export default {
     btn_chgAreaData(){
       const newData = {
         name: this.user.name,
-        email: this.user.email,
         introduction: this.user.introduction
       }
       return this.$store.dispatch('chgAreaData', newData);
+    },
+    chgAvatarData(event){
+      const avatar = event.target.files[0];
+      //console.log("🚀 ~ chgAvatarData ~ avatar:", avatar)
+      if(avatar){
+        const reader = new FileReader()
+        reader.onload = () => {
+          this.user.avatar = reader.result
+          const newData = {
+          avatar: this.user.avatar,
+          }
+          return this.$store.dispatch('chgAreaData', newData);
+        }
+        reader.readAsDataURL(avatar)
+      }
     },
     copyText(){
       let copyText = document.getElementById("CopyUrl").textContent;

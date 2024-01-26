@@ -32,7 +32,10 @@
               會員專區
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item pe-none" href="#">@頭像 {{member_data.name}}</a></li>
+              <li><a class="dropdown-item pe-none" href="#">
+                <img v-if = member_data.avatar class="personal-avatar" alt="avatar" :src="member_data.avatar"> <!--頭像--> 
+                {{member_data.name}}
+              </a></li>
               <li><a class="dropdown-item" href="/memberarea/data"><img style="padding-right: 5px;" src="@/assets/image/gear.svg">個人資料</a></li>
               <li><a @click="logout()" class="dropdown-item" href="#"><img style="padding-right: 5px;" src="@/assets/image/box-arrow-left.svg">登出{{member_data.name}}</a></li>
             </ul>
@@ -66,5 +69,13 @@ export default {
 </script>
 
 <style scoped>
-
+.personal-avatar {
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  /* box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2); */
+  /* transition: all ease-in-out .3s; */
+}
 </style>

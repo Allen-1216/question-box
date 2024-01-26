@@ -13,7 +13,7 @@ const actions = {
         await axios.get(`/api/user`)
             .then((response) => {
                 commit('SET_MEMBER_DATA', response.data)
-                 //console.log(response.data)
+                //console.log("🚀 ~ .then ~ response.data:", response.data)
             })
             .catch((error) => console.log(error))
     },
@@ -28,10 +28,14 @@ const actions = {
         if (!user.introduction) {
             user.introduction = null;
         }
+        if (!user.avatar) {
+            user.avatar = null;
+        }
         await axios.patch(`/api/user`, {
             name: user.name,
             email: user.email,
             introduction: user.introduction,
+            avatar: user.avatar,
         }).then((response) => {
             if(response.data.state === "success"){
                 location.reload();
