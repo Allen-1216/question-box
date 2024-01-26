@@ -57,7 +57,7 @@
               <div class="modal-body">
                 <form>
                   <label for="recipient-name" class="col-form-label">請輸入新名稱:</label>
-                  <input v-model="user.name" type="text" class="form-control" id="recipient-name">
+                  <input v-model="user.name" type="text" class="form-control" id="recipient-name" autocomplete="off">
                 </form>
               </div>
               <div class="modal-footer">
@@ -82,13 +82,13 @@
               <div class="modal-body">
                 <form>
                   <label for="recipient-name" class="col-form-label">請輸入新 email:</label>
-                  <input v-model="user.email" @input="validateEmail" type="email" class="form-control" id="recipient-name" placeholder="name@gmail.com">
+                  <input v-model="user.email" @input="validateEmail" type="email" class="form-control" id="recipient-name" placeholder="name@gmail.com" autocomplete="off">
                   <div v-if="emailValidationMessage" class="email-verify-message">{{ emailValidationMessage }}</div>
                 </form>
               </div>
               <div class="modal-footer">
                 <button @click="clearEmailForm()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                <button @click="btn_chgAreaData()" type="button" class="btn btn-primary">儲存</button>
+                <button @click="btn_chgEmailData()" type="button" class="btn btn-primary">儲存</button>
               </div>
             </div>
           </div>
@@ -159,16 +159,22 @@ export default {
     ])
   },
   methods: {
-    btn_chgAreaData(){
+    btn_chgEmailData(){
       if (this.validateEmail()) {
         //console.log('email格式通過驗證');
         const newData = {
-          name: this.user.name,
           email: this.user.email,
-          introduction: this.user.introduction
         }
         return this.$store.dispatch('chgAreaData', newData);
       }
+    },
+    btn_chgAreaData(){
+      const newData = {
+        name: this.user.name,
+        email: this.user.email,
+        introduction: this.user.introduction
+      }
+      return this.$store.dispatch('chgAreaData', newData);
     },
     copyText(){
       let copyText = document.getElementById("CopyUrl").textContent;
