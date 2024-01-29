@@ -5,7 +5,7 @@ const state = {
 }
 const mutations = {
     SET_MEMBER_DATA(state, payload){
-        state.member_data = payload;
+        state.member_data = payload.data;
     }
 }
 const actions = {
@@ -13,7 +13,6 @@ const actions = {
         await axios.get(`/api/user`)
             .then((response) => {
                 commit('SET_MEMBER_DATA', response.data)
-                //console.log("🚀 ~ .then ~ response.data:", response.data)
             })
             .catch((error) => console.log(error))
     },
@@ -36,7 +35,8 @@ const actions = {
             email: user.email,
             introduction: user.introduction,
             avatar: user.avatar,
-        }).then((response) => {
+        })
+        .then((response) => {
             if(response.data.state === "success"){
                 location.reload();
             }
@@ -44,7 +44,7 @@ const actions = {
                 alert(response.data.message)
             }
         })
-            .catch((error) => console.log(error))
+        .catch((error) => console.log(error))
     },
 }
 const getters = {

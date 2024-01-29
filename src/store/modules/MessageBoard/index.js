@@ -5,7 +5,7 @@ const state = {
 }
 const mutations = {
     SET_MESSAGE_BOARD_DATA(state, payload){
-        state.message_board_data = payload;
+        state.message_board_data = payload.data;
     }
 }
 const actions = {
@@ -15,11 +15,9 @@ const actions = {
         const matches = path.match(regex);
         if (matches) {
             const account = matches[1];
-            // console.log("account: ", account)
             await axios.get(`/api/user/${account}`)
                 .then((response) => {
                     commit('SET_MESSAGE_BOARD_DATA', response.data)
-                    //console.log(response.data)
                 })
                 .catch((error) => console.log(error))
         }
@@ -34,12 +32,11 @@ const actions = {
             if(response.data.state === "success"){
                 alert(response.data.message)
             }
-            else{
-                alert(response.data.message)
-                window.location.reload();
-            }
-        })
-            .catch((error) => console.log(error))
+            // else{
+            //     alert(response.data.message)
+            //     window.location.reload();
+            // }
+        }).catch((error) => alert(error.response.data.message))
     }
 }
 const getters = {

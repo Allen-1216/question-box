@@ -5,7 +5,7 @@ const state = {
 }
 const mutations = {
     SET_BOOKMARK_CONTENT(state, payload){
-        state.bookmark_content = payload;
+        state.bookmark_content = payload.data;
     }
 }
 const actions = {

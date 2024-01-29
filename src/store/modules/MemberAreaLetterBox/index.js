@@ -5,7 +5,7 @@ const state = {
 }
 const mutations = {
     SET_CONTENT(state, payload){
-        state.content = payload;
+        state.content = payload.data;
     }
 }
 const actions = {
@@ -13,7 +13,6 @@ const actions = {
         await axios.get(`/api/user/letterbox`)
             .then((response) => {
                 commit('SET_CONTENT', response.data)
-                //console.log(response.data)
             })
             .catch((error) => console.log(error))
     },
@@ -40,11 +39,11 @@ const actions = {
             if(response.data.state === "success"){
                 alert(response.data.message)
             }
-            else{
-                alert(response.data.message)
-            }
+            // else{
+            //     alert(response.data.message)
+            // }
         })
-            .catch((error) => console.log(error))
+            .catch((error) => alert(error.response.data.message))
     }
 }
 const getters = {

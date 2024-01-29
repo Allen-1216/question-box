@@ -63,7 +63,7 @@ router.beforeEach((to, from, next) => {
                 }else {
                     next() // 登入成功，則可繼續往下執行
                 }
-            })
+            }).catch((error) => console.log(error))
     }
     else next()
 })

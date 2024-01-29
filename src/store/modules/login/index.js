@@ -15,42 +15,35 @@ const actions = {
         await axios.post(`/api/login`, {
             username: user.username,
             password: user.password,
-        }).then((response) => {
+        })
+        .then((response) => {
             if(response.data.state === "success"){
                 //alert(response.data.message)
                 let backdrop = document.querySelector('.modal-backdrop'); //解決 modal-backdrop 背景
                 backdrop.parentNode.removeChild(backdrop);
                 router.push('/memberarea')
             }
-            else{
-                alert(response.data.message)
-            }
         })
-            .catch((error) => console.log(error))
+        .catch((error) => alert(error.response.data.message))
     },
     async logOut(){
         await axios.post(`/api/logout`)
             .then((response) => {
-            if(response.data.state === "success"){
-                let url = location.href;
-                if(url.includes('/home')){
-                    history.go(0)
-                }else{
-                    router.push('/home')
+                if(response.data.state === "success"){
+                    let url = location.href;
+                    if(url.includes('/home')){
+                        history.go(0)
+                    }else{
+                        router.push('/home')
+                    }
                 }
-            }
-            else{
-                alert(response.data.message)
-            }
-        })
+            })
             .catch((error) => console.log(error))
     },
     async isLoggedIn({commit}){
         await axios.get(`/api/user/loginStatus`)
             .then((response) => {
-                // console.log("isLogin:", response.data.state)
                 commit('IS_LOGGED_IN', response.data.state === "success")
-                // return(response.data.state === "success")
             })
             .catch((error) => console.log(error))
     },
@@ -64,11 +57,8 @@ const actions = {
                 alert(response.data.message)
                 location.reload();
             }
-            else{
-                alert(response.data.message)
-            }
         })
-            .catch((error) => console.log(error))
+        .catch((error) => alert(error.response.data.message))
     },
 }
 const getters = { //store 的 computed
