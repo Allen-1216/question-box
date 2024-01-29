@@ -11,7 +11,7 @@ const mutations = {
 const actions = {
     async getMessageBoardData({commit}) {
         const path = window.location.pathname;
-        const regex = /^\/messageboardpage\/(\d+)$/; //讀取網址後方的 account
+        const regex = /^\/messageboardpage\/(.+)$/; //讀取網址後方的 account
         const matches = path.match(regex);
         if (matches) {
             const account = matches[1];

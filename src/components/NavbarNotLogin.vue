@@ -43,7 +43,7 @@
                     </form>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button @click="clearLoginForm()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                     <button @click="btn_login()" type="button" class="btn btn-primary">登入</button>
                   </div>
                 </div>
@@ -75,7 +75,7 @@
                     </form>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button @click="clearSignupForm()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                     <button @click="btn_signup()" type="button" class="btn btn-primary">註冊</button>
                   </div>
                 </div>
@@ -122,7 +122,20 @@ export default {
         confirmPassword: this.signup.confirmPassword,
       }
       return this.$store.dispatch('signUp', signupDetail);
-    }
+    },
+    clearLoginForm() {
+      setTimeout(() => {
+        this.login.username = "";
+        this.login.password = "";
+      }, 100);
+    },
+    clearSignupForm() {
+      setTimeout(() => {
+        this.signup.username = "";
+        this.signup.password = "";
+        this.signup.confirmPassword = "";
+      }, 100);
+    },
   }
 }
 

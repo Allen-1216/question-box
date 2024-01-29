@@ -5,14 +5,19 @@ const state = {
 }
 const mutations = {
     SET_CONTENT(state, payload){
-        state.content = payload.data;
+        state.content = payload;
     }
 }
 const actions = {
     async getContent ({commit}) {
         await axios.get(`/api/user/letterbox`)
             .then((response) => {
-                commit('SET_CONTENT', response.data)
+                //處理UTC時區問題 依照本地調整
+                const resData = response.data.data.map(message => {
+                    const localTime = new Date(message.content_time).toLocaleString(undefined,{hour12: false,})
+                    return { ...message, content_time: localTime };
+                });
+                commit('SET_CONTENT', resData)
             })
             .catch((error) => console.log(error))
     },
