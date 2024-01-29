@@ -6,11 +6,11 @@
   <div class="row" style="margin-top: 100px">
     <div class="col"></div>
     <div class="col-4 text-center shadow border">
-      <p>頭像</p> <!--頭像-->
-      <p>{{message_board_data.name}}</p> <!--顯示名稱-->
-      <p>@{{message_board_data.account}}</p> <!--account-->
-      <p>@logo</p> <!--logo-->
-      <p>{{message_board_data.introduction}}</p> <!--自我介紹-->
+      <img v-if = message_board_data.avatar class="personal-avatar" alt="avatar" :src="message_board_data.avatar"> <!--頭像-->
+      <p style="font-size:22px">{{message_board_data.name}}</p> <!--顯示名稱-->
+      <p class="text-secondary" style="margin-top: -18px;">@{{message_board_data.account}}</p> <!--account-->
+      <!-- <p>@logo</p> -->
+      <p class="text-newline p-2 bd-highlight">{{message_board_data.introduction}}</p> <!--自我介紹-->
     </div>
     <div class="col"></div>
   </div>
@@ -71,5 +71,20 @@ export default {
 <style scoped>
 *{
   word-break : break-all
+}
+.text-newline{
+  white-space : pre-wrap; /*讀取時將\n換行*/
+}
+.personal-avatar {
+  width: 120px;
+  height: 120px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  transition: all ease-in-out .3s;
+}
+.personal-avatar:hover {
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
 }
 </style>

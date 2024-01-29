@@ -23,10 +23,10 @@ const router = createRouter({
         {
             path: '/memberarea', //對外資訊頁面
             component: MemberAreaPage,
-            meta: { requiresAuth: true } // 設為需為登入狀態
+            meta: { requiresAuth: true } //設定需為登入狀態
         },
         {
-            path: '/memberarea/letterbox', //收到的內容頁面
+            path: '/memberarea/letterbox', //查看信箱頁面
             component: MemberAreaLetterBoxPage,
             meta: { requiresAuth: true }
         },

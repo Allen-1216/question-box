@@ -62,7 +62,7 @@
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button @click="clearNameForm()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                 <button @click="btn_chgAreaData()" type="button" class="btn btn-primary">儲存</button>
               </div>
             </div>
@@ -113,7 +113,7 @@
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button @click="clearIntroductionForm()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
                 <button @click="btn_chgAreaData()" type="button" class="btn btn-primary">儲存</button>
               </div>
             </div>
@@ -211,6 +211,16 @@ export default {
       setTimeout(() => {
         this.user.email = '';
         this.emailValidationMessage = '';
+      }, 100);
+    },
+    clearNameForm() {
+      setTimeout(() => {
+        this.user.name = '';
+      }, 100);
+    },
+    clearIntroductionForm() {
+      setTimeout(() => {
+        this.user.introduction = '';
       }, 100);
     },
   }

@@ -21,7 +21,8 @@ const actions = {
                 //alert(response.data.message)
                 let backdrop = document.querySelector('.modal-backdrop'); //解決 modal-backdrop 背景
                 backdrop.parentNode.removeChild(backdrop);
-                router.push('/memberarea')
+                history.go(0)
+                //router.push('/memberarea')
             }
         })
         .catch((error) => alert(error.response.data.message))
@@ -34,7 +35,7 @@ const actions = {
                     if(url.includes('/home')){
                         history.go(0)
                     }else{
-                        router.push('/home')
+                        history.go(0)
                     }
                 }
             })

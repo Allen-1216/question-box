@@ -32,10 +32,6 @@ const actions = {
             if(response.data.state === "success"){
                 alert(response.data.message)
             }
-            // else{
-            //     alert(response.data.message)
-            //     window.location.reload();
-            // }
         }).catch((error) => alert(error.response.data.message))
     }
 }
