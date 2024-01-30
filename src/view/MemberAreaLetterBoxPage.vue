@@ -2,65 +2,98 @@
   <!--navbar-->
   <NavbarLogin/>
   <!--letterbox-->
-  <div class="row" style="margin-top: 100px">
-    <div class="col"></div>
-    <div class="col-4 row" style="padding: 0;">
-      <h1 class="text-center">收到的信件</h1>
-      <div v-for="(item, index) in content" :key="index" class="border border-2 rounded-3"
-           style="padding: 15px; margin-bottom: 10px">
-        <button type="button" class="btn-close float-end" aria-label="Close" style="box-shadow: none;" data-bs-toggle="modal" :data-bs-target="'#exampleModal-' + index"></button>
-        <!-- Modal -->
-        <div class="modal fade" :id="'exampleModal-' + index" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">刪除訊息</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <p>確定要刪除嗎</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                <button @click="btn_deleteContent(item.mid)" type="button" class="btn btn-primary">確定</button>
+  <div class="container">
+    <div class="row" style="margin-top: 100px;">
+      <div class="col"></div>
+      <div class="col-4 row" style="padding: 0;">
+        <h1 class="text-center">收到的信件</h1>
+        <!-- 循環顯示每10則訊息 -->
+        <div v-for="(item, index) in paginatedContent" :key="index" class="border border-2 rounded-3"
+            style="padding: 15px; margin-bottom: 10px;">
+          <button type="button" class="btn-close float-end" aria-label="Close" style="box-shadow: none;" data-bs-toggle="modal" :data-bs-target="'#exampleModal-' + index"></button>
+          <!-- Modal -->
+          <div class="modal fade" :id="'exampleModal-' + index" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">刪除訊息</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>確定要刪除嗎</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                  <button @click="btn_deleteContent(item.mid)" type="button" class="btn btn-primary">確定</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="text-secondary paddingbot">#{{ index + 1 }}</div> <!--index-->
-        <span>{{ item.sender_name }}</span> <!--寄出人name-->
-        <span class="text-secondary">&nbsp;@{{ item.sender_account }}</span> <!--寄出人account-->
-        <div class="text-secondary float-end">{{ item.content_time.replace(/T/g,' ').replace(/\.[\d]{3}Z/,'')}}</div> <!--訊息時間-->
-        <div class="paddingtop text-newline">{{ item.content }}</div> <!--訊息-->
-        <div style="padding-top: 10px;"></div>
+          <div class="text-secondary paddingbot">#{{ (currentPage - 1) * contentPerPage + index + 1 }}</div> <!--index-->
+          <span>{{ item.sender_name }}</span> <!--寄出人name-->
+          <span class="text-secondary">&nbsp;@{{ item.sender_account }}</span> <!--寄出人account-->
+          <div class="text-secondary float-end">{{ item.content_time.replace(/T/g,' ').replace(/\.[\d]{3}Z/,'')}}</div> <!--訊息時間-->
+          <div class="paddingtop text-newline">{{ item.content }}</div> <!--訊息-->
+          <div style="padding-top: 10px;"></div>
 
-        <div class="exit_hover float-start">
-          <!--儲存內容-->
-          <button class="btn"
-                  @mouseover="pic1Visible[index] = true"
-                  @mouseleave="(!pic1isClicking[index]) && (pic1Visible[index] = false)"
-                  @click="togglePic1Visible(index);
-                  btn_add_bookmark(item.account, item.mid)">
-            <img src="@/assets/image/bookmark.svg" v-if="!pic1Visible[index]">
-            <img src="@/assets/image/bookmark-fill.svg" v-if="pic1Visible[index]">
-          </button>
+          <div class="exit_hover float-start">
+            <!--儲存內容-->
+            <button class="btn"
+                    @mouseover="pic1Visible[index] = true"
+                    @mouseleave="(!pic1isClicking[index]) && (pic1Visible[index] = false)"
+                    @click="togglePic1Visible(index);
+                    btn_add_bookmark(item.account, item.mid)">
+              <img src="@/assets/image/bookmark.svg" v-if="!pic1Visible[index]">
+              <img src="@/assets/image/bookmark-fill.svg" v-if="pic1Visible[index]">
+            </button>
+          </div>
+          <div class="exit_hover float-start">
+            <!--檢舉內容-->
+            <button class="btn"
+                    @mouseover="pic2Visible[index] = true"
+                    @mouseleave="(!pic2isClicking[index]) && (pic2Visible[index] = false)"
+                    @click="togglePic2Visible(index)">
+              <img src="@/assets/image/exclamation-triangle.svg" v-if="!pic2Visible[index]">
+              <img src="@/assets/image/exclamation-triangle-fill.svg" v-if="pic2Visible[index]">
+            </button>
+          </div>
+          <!--放大檢視內容-->
+          <button type="button" class="btn float-end" disabled><img style="margin: 0;"
+                                                          src="@/assets/image/arrows-angle-expand.svg"></button>
         </div>
-        <div class="exit_hover float-start">
-          <!--檢舉內容-->
-          <button class="btn"
-                  @mouseover="pic2Visible[index] = true"
-                  @mouseleave="(!pic2isClicking[index]) && (pic2Visible[index] = false)"
-                  @click="togglePic2Visible(index)">
-            <img src="@/assets/image/exclamation-triangle.svg" v-if="!pic2Visible[index]">
-            <img src="@/assets/image/exclamation-triangle-fill.svg" v-if="pic2Visible[index]">
-          </button>
-        </div>
-        <!--放大檢視內容-->
-        <button type="button" class="btn float-end" disabled><img style="margin: 0;"
-                                                         src="@/assets/image/arrows-angle-expand.svg"></button>
       </div>
+      <div class="col"></div>
     </div>
-    <div class="col"></div>
+  </div>
+  <!-- Bootstrap 分頁元件 -->
+  <div style="text-align : center;">
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" :class="{ disabled: currentPage === 1 }">
+          <a class="page-link" href="#" aria-label="Previous" @click.prevent="changePage(currentPage = 1)">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item" :class="{ disabled: currentPage === 1 }">
+          <a class="page-link" href="#" aria-label="Previous" @click.prevent="changePage(currentPage - 1)">
+            <span aria-hidden="true">&lsaquo;</span>
+          </a>
+        </li>
+        <li class="page-item" v-for="page in totalPageCount" :key="page" :class="{ active: currentPage === page }">
+          <a class="page-link" href="#" @click.prevent="changePage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" :class="{ disabled: currentPage === totalPageCount }">
+          <a class="page-link" href="#" aria-label="Next" @click.prevent="changePage(currentPage + 1)">
+            <span aria-hidden="true">&rsaquo;</span>
+          </a>
+        </li>
+        <li class="page-item" :class="{ disabled: currentPage === totalPageCount }">
+          <a class="page-link" href="#" aria-label="Next" @click.prevent="changePage(totalPageCount)">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
@@ -77,6 +110,8 @@ export default {
       pic2Visible: [],
       pic1isClicking: [],
       pic2isClicking: [],
+      contentPerPage: 10,
+      currentPage: 1,
     }
   },
   methods: {
@@ -109,7 +144,13 @@ export default {
         }
         this.$store.dispatch('addBookmarkContent', bookmarkDetail);
       }
+    },
+    // 改變當前頁數
+    changePage(page) {
+      if (page >= 1 && page <= this.totalPageCount) {
+        this.currentPage = page;
       }
+    },
   },
   created() {
     this.$store.dispatch('getContent');
@@ -120,6 +161,19 @@ export default {
     ...mapGetters([
       'content'
     ]),
+    // 計算分頁後的訊息數據
+    paginatedContent() {
+      // 將物件的值轉換成陣列
+      const contentArray = Object.values(this.content);
+      const startIndex = (this.currentPage - 1) * this.contentPerPage;
+      const endIndex = startIndex + this.contentPerPage;
+      return contentArray.slice(startIndex, Math.min(endIndex, contentArray.length));
+    },
+    // 計算總頁數
+    totalPageCount: (state) => {
+        const contentArray = Object.values(state.content);
+        return Math.ceil(contentArray.length / state.contentPerPage);
+    },
   },
 }
 </script>
