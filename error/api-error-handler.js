@@ -1,6 +1,6 @@
 const ApiError = require('../error/ApiError')
 
-function apiErrorHandler (err, req, res, next) {
+function apiErrorHandler (err, req, res) {
     //in prod don't use console.log or console.err because
     //it is not async
     //console.error(err)
