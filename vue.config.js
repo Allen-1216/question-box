@@ -4,7 +4,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '/api': {
-        target: process.env.DATABASE_URL + ":" + process.env.PORT,
+        target: process.env.PORT ? `${process.env.DATABASE_URL}:${process.env.PORT}` : 'https://localhost:3000',
         // target: "https://localhost:" + process.env.PORT,
         changeOrigin: true,
         pathRewrite: {
