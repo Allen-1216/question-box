@@ -10,7 +10,7 @@ const mutations = {
 }
 const actions = {
     async getMemberData({commit}) {
-        await axios.get(`/api/user`)
+        await axios.get(`/user`)
             .then((response) => {
                 commit('SET_MEMBER_DATA', response.data)
             })
@@ -30,7 +30,7 @@ const actions = {
         if (!user.avatar) {
             user.avatar = null;
         }
-        await axios.patch(`/api/user`, {
+        await axios.patch(`/user`, {
             name: user.name,
             email: user.email,
             introduction: user.introduction,

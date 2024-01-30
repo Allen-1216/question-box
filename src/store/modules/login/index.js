@@ -12,7 +12,7 @@ const mutations = {
 }
 const actions = {
     async logIn({commit}, user) {
-        await axios.post(`/api/login`, {
+        await axios.post(`/login`, {
             username: user.username,
             password: user.password,
         })
@@ -28,7 +28,7 @@ const actions = {
         .catch((error) => alert(error.response.data.message))
     },
     async logOut(){
-        await axios.post(`/api/logout`)
+        await axios.post(`/logout`)
             .then((response) => {
                 if(response.data.state === "success"){
                     let url = location.href;
@@ -42,14 +42,14 @@ const actions = {
             .catch((error) => console.log(error))
     },
     async isLoggedIn({commit}){
-        await axios.get(`/api/user/loginStatus`)
+        await axios.get(`/user/loginStatus`)
             .then((response) => {
                 commit('IS_LOGGED_IN', response.data.state === "success")
             })
             .catch((error) => console.log(error))
     },
     async signUp({commit}, user) {
-        await axios.post(`/api/signup`, {
+        await axios.post(`/signup`, {
             username: user.username,
             password: user.password,
             confirmPassword: user.confirmPassword,
