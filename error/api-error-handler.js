@@ -3,7 +3,7 @@ const ApiError = require('../error/ApiError')
 function apiErrorHandler (err, req, res, next) {
     //in prod don't use console.log or console.err because
     //it is not async
-    console.error(err)
+    //console.error(err)
 
     if(err instanceof ApiError){
         res.status(err.code).json(err.message);
