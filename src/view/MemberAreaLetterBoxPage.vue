@@ -132,7 +132,7 @@ export default {
       if (item.isBookmarked) {
         // 已經儲存，執行相應的邏輯
         // 取消儲存
-        this.btn_delete_Collections(item.cid);
+        this.btn_delete_Collections(item.bookmarkCid);
         this.pic1Visible[index] = !this.pic1Visible[index];  // 切換回原本的圖片
         this.pic1isClicking[index] = false;  // 重置點擊狀態
       } else {
