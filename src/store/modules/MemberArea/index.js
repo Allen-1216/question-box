@@ -9,7 +9,7 @@ const mutations = {
         state.member_data = payload.data;
     },
     SET_HEROKU_URL(state, payload){
-        state.heroku_url = payload.data;
+        state.heroku_url = payload;
     }
 }
 const actions = {
