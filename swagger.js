@@ -21,7 +21,7 @@ const options = {
       },
       servers: [
         {
-          url: "https://localhost:443/",
+          url: process.env.DATABASE_URL,
           description: 'Development server',
         },
         {

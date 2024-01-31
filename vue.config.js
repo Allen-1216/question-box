@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: './'
+  publicPath: '/'
 }
 // const { defineConfig } = require('@vue/cli-service')
 // module.exports = defineConfig({
