@@ -40,11 +40,10 @@
             <!--儲存內容-->
             <button class="btn"
                     @mouseover="pic1Visible[index] = true"
-                    @mouseleave="(!pic1isClicking[index]) && (pic1Visible[index] = false)">
-              <img @click="togglePic1Visible(item, index)" 
-              src="@/assets/image/bookmark.svg" v-if="!pic1Visible[index] && !item.isBookmarked">
-              <img @click="togglePic1Visible(item, index)" 
-              src="@/assets/image/bookmark-fill.svg" v-if="pic1Visible[index] || item.isBookmarked">
+                    @mouseleave="(!pic1isClicking[index]) && (pic1Visible[index] = false)"
+                    @click="togglePic1Visible(item, index)">
+              <img src="@/assets/image/bookmark.svg" v-if="!pic1Visible[index] && !item.isBookmarked">
+              <img src="@/assets/image/bookmark-fill.svg" v-if="pic1Visible[index] || item.isBookmarked">
             </button>
           </div>
           <div class="exit_hover float-start">
@@ -187,7 +186,7 @@ export default {
         return {
           ...message,
           isBookmarked: bookmarkedMap.has(message.mid),
-          bookmarkCid: bookmarkedMap.get(message.cid),
+          bookmarkCid: bookmarkedMap.get(message.mid),
         };
       });
     },
