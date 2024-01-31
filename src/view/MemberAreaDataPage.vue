@@ -126,7 +126,7 @@
           <img class="copy-url-img" src="@/assets/image/link-45deg.svg">
         </span>
         <br>
-        <a id="CopyUrl" :href="'http://localhost:8080/messageboardpage/' + member_data.account" class="link-dark" target="_blank">http://localhost:8080/messageboardpage/{{member_data.account}}</a>
+        <a id="CopyUrl" :href="process.env.DATABASE_URL + '/messageboardpage/' + member_data.account" class="link-dark" target="_blank">{{process.env.DATABASE_URL}}/messageboardpage/{{member_data.account}}</a>
       </div>
     </div>
     <div class="col"></div>
