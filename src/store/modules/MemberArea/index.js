@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const state = {
-    member_data: {},
-    heroku_url:{},
+    member_data: {}
+    //heroku_url:{},
 }
 const mutations = {
     SET_MEMBER_DATA(state, payload){
