@@ -1,6 +1,9 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  transpileDependencies: true,
+module.exports = {
+  publicPath: './'
+}
+// const { defineConfig } = require('@vue/cli-service')
+// module.exports = defineConfig({
+//   transpileDependencies: true,
   // devServer: {
   //   proxy: {
   //     '/api': {
@@ -12,7 +15,7 @@ module.exports = defineConfig({
   //     },
   //   }
   // }
-})
+// })
 
 // const { defineConfig } = require('@vue/cli-service')
 // const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
