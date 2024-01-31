@@ -92,17 +92,29 @@ const responses = {
       LetterBox: {
         type: 'object',
         properties: {
-          state: {
+          mid: {
             type: 'string',
-            description: '請求狀態',
+            description: '文章編號',
           },
-          message: {
+          account: {
             type: 'string',
-            description: '提示訊息',
+            description: '使用者的帳號',
           },
-          data: {
+          content_time: {
             type: 'string',
-            description: '回傳的資料',
+            description: '訊息建立時間',
+          },
+          sender_account: {
+            type: 'string',
+            description: '發送訊息的使用者帳號',
+          },
+          sender_name: {
+            type: 'string',
+            description: '發送訊息的使用者名稱',
+          },
+          content: {
+            type: 'string',
+            description: '訊息內容',
           },
         }
       },
