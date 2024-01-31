@@ -40,11 +40,11 @@
             <!--儲存內容-->
             <button class="btn"
                     @mouseover="pic1Visible[index] = true"
-                    @mouseleave="(!pic1isClicking[index]) && (pic1Visible[index] = false)"
-                    @click="togglePic1Visible(index);
-                    btn_add_bookmark(item.account, item.mid)">
-              <img src="@/assets/image/bookmark.svg" v-if="!pic1Visible[index]">
-              <img src="@/assets/image/bookmark-fill.svg" v-if="pic1Visible[index]">
+                    @mouseleave="(!pic1isClicking[index]) && (pic1Visible[index] = false)">
+              <img @click="togglePic1Visible(item, index)" 
+              src="@/assets/image/bookmark.svg" v-if="!pic1Visible[index] && !item.isBookmarked">
+              <img @click="togglePic1Visible(item, index)" 
+              src="@/assets/image/bookmark-fill.svg" v-if="pic1Visible[index] || item.isBookmarked">
             </button>
           </div>
           <div class="exit_hover float-start">
@@ -115,11 +115,30 @@ export default {
     }
   },
   methods: {
-    togglePic1Visible(index) {
-      if (this.pic1isClicking[index]) {  // 如果已經點擊過一次
+    btn_add_bookmark(account,mid){
+      if(this.pic1isClicking) {
+        const bookmarkDetail = {
+          account: account,
+          article_id: mid
+        }
+        this.$store.dispatch('addBookmarkContent', bookmarkDetail);
+      }
+    },
+    btn_delete_Collections(cid){
+      return this.$store.dispatch('deleteCollections', cid);
+    },
+    togglePic1Visible(item, index) {
+      // 使用 item.isBookmarked 來判斷書籤狀態
+      if (item.isBookmarked) {
+        // 已經儲存，執行相應的邏輯
+        // 取消儲存
+        this.btn_delete_Collections(item.cid);
         this.pic1Visible[index] = !this.pic1Visible[index];  // 切換回原本的圖片
         this.pic1isClicking[index] = false;  // 重置點擊狀態
-      } else{
+      } else {
+        // 未儲存，執行相應的邏輯
+        // 將訊息儲存
+        this.btn_add_bookmark(item.account, item.mid)
         this.pic1isClicking[index] = true;  // 開始點擊
         this.pic1Visible[index] = !this.pic1Visible[index];  // 切換成另一個圖片
       }
@@ -136,15 +155,6 @@ export default {
     btn_deleteContent(mid){
       return this.$store.dispatch('deleteContent', mid);
     },
-    btn_add_bookmark(account,mid){
-      if(this.pic1isClicking) {
-        const bookmarkDetail = {
-          account: account,
-          article_id: mid
-        }
-        this.$store.dispatch('addBookmarkContent', bookmarkDetail);
-      }
-    },
     // 改變當前頁數
     changePage(page) {
       if (page >= 1 && page <= this.totalPageCount) {
@@ -154,12 +164,14 @@ export default {
   },
   created() {
     this.$store.dispatch('getContent');
+    this.$store.dispatch('getBookmarkContent');
     this.pic1Visible = Array(this.content.length).fill(false);
     this.pic2Visible = Array(this.content.length).fill(false);
   },
   computed: {
     ...mapGetters([
-      'content'
+      'content',
+      'bookmark_content',
     ]),
     // 計算分頁後的訊息數據
     paginatedContent() {
@@ -167,7 +179,17 @@ export default {
       const contentArray = Object.values(this.content);
       const startIndex = (this.currentPage - 1) * this.contentPerPage;
       const endIndex = startIndex + this.contentPerPage;
-      return contentArray.slice(startIndex, Math.min(endIndex, contentArray.length));
+
+      const bookmarks = this.getBookmarkContent;
+      // 將已收藏物件的 mid 與 cid 轉成 Map 方便後面查詢
+      const bookmarkedMap = new Map(bookmarks.map(bookmark => [bookmark.mid, bookmark.cid]));
+      return contentArray.slice(startIndex, Math.min(endIndex, contentArray.length)).map(message => {
+        return {
+          ...message,
+          isBookmarked: bookmarkedMap.has(message.mid),
+          bookmarkCid: bookmarkedMap.get(message.cid),
+        };
+      });
     },
     // 計算總頁數
     totalPageCount: (state) => {
