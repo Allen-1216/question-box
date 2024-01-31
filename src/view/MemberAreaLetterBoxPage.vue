@@ -123,23 +123,23 @@ export default {
         this.$store.dispatch('addBookmarkContent', bookmarkDetail);
       }
     },
-    btn_delete_bookmark(cid){
-      return this.$store.dispatch('deleteCollectionsfromletterbox', cid);
-    },
+    // btn_delete_bookmark(cid){
+    //   return this.$store.dispatch('deleteCollectionsfromletterbox', cid);
+    // },
     togglePic1Visible(item, index) {
       // 使用 item.isBookmarked 來判斷書籤狀態
-      if (item.isBookmarked) {
-        // 已經儲存，執行相應的邏輯
-        // 取消儲存
-        this.pic1Visible[index] = !this.pic1Visible[index];  // 切換回原本的圖片
-        this.pic1isClicking[index] = false;  // 重置點擊狀態
-        this.btn_delete_bookmark(item.bookmarkCid);
-      } else {
+      if (!item.isBookmarked) {
         // 未儲存，執行相應的邏輯
         // 將訊息儲存
         this.pic1isClicking[index] = true;  // 開始點擊
         this.pic1Visible[index] = !this.pic1Visible[index];  // 切換成另一個圖片
         this.btn_add_bookmark(item.account, item.mid)
+        // else
+        // // 已經儲存，執行相應的邏輯
+        // // 取消儲存
+        // this.pic1Visible[index] = !this.pic1Visible[index];  // 切換回原本的圖片
+        // this.pic1isClicking[index] = false;  // 重置點擊狀態
+        // this.btn_delete_bookmark(item.bookmarkCid);
       }
     },
     togglePic2Visible(index) {
