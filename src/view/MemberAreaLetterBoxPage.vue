@@ -131,21 +131,24 @@ export default {
       if (item.isBookmarked) {
         // 已經儲存，執行相應的邏輯
         // 取消儲存
-        this.pic1Visible[index] = !this.pic1Visible[index];  // 切換回原本的圖片
-        this.pic1isClicking[index] = false;  // 重置點擊狀態
         this.btn_delete_bookmark(item.bookmarkCid);
+
+        this.$nextTick(() => {
+          this.pic1Visible[index] = !this.pic1Visible[index];  // 切換回原本的圖片
+          this.pic1isClicking[index] = false;  // 重置點擊狀態
+          this.$forceUpdate();
+        });
       } else {
         // 未儲存，執行相應的邏輯
         // 將訊息儲存
-        this.pic1isClicking[index] = true;  // 開始點擊
-        this.pic1Visible[index] = !this.pic1Visible[index];  // 切換成另一個圖片
         this.btn_add_bookmark(item.account, item.mid)
+        // 在 $nextTick 內使用 $forceUpdate 強制更新 Vue 實例
+        this.$nextTick(() => {
+          this.pic1isClicking[index] = true;  // 開始點擊
+          this.pic1Visible[index] = !this.pic1Visible[index];  // 切換成另一個圖片
+          this.$forceUpdate();
+        });
       }
-      // 利用 $nextTick 確保 DOM 已經更新
-      this.$nextTick(() => {
-        this.pic1Visible[index] = !this.pic1Visible[index];  // 切換回原本的圖片
-        this.pic1isClicking[index] = false;  // 重置點擊狀態
-      });
     },
     togglePic2Visible(index) {
       if (this.pic2isClicking[index]) {  // 如果已經點擊
