@@ -35,6 +35,17 @@ const actions = {
         })
             .catch((error) => console.log(error))
     },
+    //eslint-disable-next-line
+    async deleteCollectionsfromletterbox({commit}, cid) {
+        await axios.delete(`/user/bookmark`,{data:{
+                cid: cid,
+            }}).then((response) => {
+            if(response.data.state != "success"){
+                alert(response.data.message)
+            }
+        })
+            .catch((error) => console.log(error))
+    },
 }
 const getters = {
     bookmark_content(state){
