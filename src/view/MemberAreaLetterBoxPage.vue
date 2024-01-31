@@ -180,7 +180,7 @@ export default {
       const startIndex = (this.currentPage - 1) * this.contentPerPage;
       const endIndex = startIndex + this.contentPerPage;
 
-      const bookmarks = this.bookmark_content;
+      const bookmarks = Object.values(this.bookmark_content);
       // 將已收藏物件的 mid 與 cid 轉成 Map 方便後面查詢
       const bookmarkedMap = new Map(bookmarks.map(bookmark => [bookmark.mid, bookmark.cid]));
       return contentArray.slice(startIndex, Math.min(endIndex, contentArray.length)).map(message => {
