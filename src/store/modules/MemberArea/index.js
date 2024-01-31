@@ -2,10 +2,14 @@ import axios from 'axios';
 
 const state = {
     member_data: {},
+    heroku_url:{},
 }
 const mutations = {
     SET_MEMBER_DATA(state, payload){
         state.member_data = payload.data;
+    },
+    SET_HEROKU_URL(state, payload){
+        state.heroku_url = payload.data;
     }
 }
 const actions = {
@@ -13,6 +17,13 @@ const actions = {
         await axios.get(`/user`)
             .then((response) => {
                 commit('SET_MEMBER_DATA', response.data)
+            })
+            .catch((error) => console.log(error))
+    },
+    async getHerokuUrl({commit}) {
+        await axios.get(`/HerokuUrl`)
+            .then((response) => {
+                commit('SET_HEROKU_URL', response.data)
             })
             .catch((error) => console.log(error))
     },
