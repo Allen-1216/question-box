@@ -118,7 +118,39 @@ const responses = {
           },
         }
       },
-      
+      BookMark: {
+        type: 'object',
+        properties: {
+          cid: {
+            type: 'string',
+            description: '收藏編號',
+          },
+          mid: {
+            type: 'string',
+            description: '訊息編號',
+          },
+          account: {
+            type: 'string',
+            description: '使用者的帳號',
+          },
+          content_time: {
+            type: 'string',
+            description: '訊息建立時間',
+          },
+          sender_account: {
+            type: 'string',
+            description: '發送訊息的使用者帳號',
+          },
+          sender_name: {
+            type: 'string',
+            description: '發送訊息的使用者名稱',
+          },
+          content: {
+            type: 'string',
+            description: '訊息內容',
+          },
+        }
+      },
       // Pagination: {
       //   type: 'object',
       //   properties: {
