@@ -1,8 +1,8 @@
 <template>
   <!--navbar-->
   <div class="navbar navbar-expand-lg navbar-light bg-light shadow row">
-    <div class="col-3"></div>
-    <div class="container col">
+    <div class="col"></div>
+    <div class="container col-10 col-sm-8 col-lg-6">
       <a href="/home"><img class="align-text-bottom" src="@/assets/image/envelope.svg"
                            style="height: 20px; width: 20px;"></a>
       <a class="navbar-brand" style="padding-left:5px" href="/home">
@@ -85,7 +85,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-3"></div>
+    <div class="col"></div>
   </div>
 </template>
 

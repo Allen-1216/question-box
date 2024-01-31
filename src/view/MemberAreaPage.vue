@@ -4,7 +4,7 @@
   <!--text box-->
   <div class="row" style="margin-top: 100px">
     <div class="col"></div>
-    <div class="col-10 col-sm-8 col-md-5 text-center shadow border">
+    <div class="col-10 col-sm-7 col-md-4 text-center shadow border">
       <img v-if = member_data.avatar class="personal-avatar" alt="avatar" :src="member_data.avatar"> <!--頭像-->
       <p style="padding-top:5px;" >{{member_data.name}}</p> <!--名稱-->
       <p>@{{member_data.account}}</p> <!--id-->

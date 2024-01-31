@@ -4,7 +4,7 @@
   <!--letterbox-->
   <div class="row" style="margin-top: 100px">
     <div class="col"></div>
-    <div class="col-10 col-sm-8 col-md-5 row" style="padding: 0;">
+    <div class="col-10 col-sm-7 col-md-4 row" style="padding: 0;">
       <h1 class="text-center">收藏的信件</h1>
       <div v-for="(item, index) in paginatedContent" :key="index" class="border border-2 rounded-3"
            style="padding: 15px; margin-bottom: 10px">
