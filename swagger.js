@@ -21,7 +21,7 @@ const options = {
       },
       servers: [
         {
-          url: process.env.DATABASE_URL,
+          url: process.env.DATABASE_URL + ":" + process.env.PORT,
           description: 'Development server',
         },
         {

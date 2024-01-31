@@ -126,7 +126,7 @@
           <img class="copy-url-img" src="@/assets/image/link-45deg.svg">
         </span>
         <br>
-        <a id="CopyUrl" :href="heroku_url.herokuUrl + '/messageboardpage/' + member_data.account" class="link-dark" target="_blank">{{heroku_url.herokuUrl}}/messageboardpage/{{member_data.account}}</a>
+        <a id="CopyUrl" :href="heroku_url.data + '/messageboardpage/' + member_data.account" class="link-dark" target="_blank">{{heroku_url.data}}/messageboardpage/{{member_data.account}}</a>
       </div>
     </div>
     <div class="col"></div>
