@@ -4,7 +4,7 @@
   <!--letterbox-->
   <div class="row" style="margin-top: 50px">
     <div class="col"></div>
-    <div class="col-4 row" style="padding: 0;">
+    <div class="col-10 col-sm-8 col-md-5 row" style="padding: 0;">
       <h1 class="text-center">個人資料</h1>
       <div class="personal-image">
         <label class="label">
