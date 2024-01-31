@@ -8,9 +8,9 @@ const mutations = {
     SET_MEMBER_DATA(state, payload){
         state.member_data = payload.data;
     },
-    SET_HEROKU_URL(state, payload){
-        state.heroku_url = payload;
-    }
+    // SET_HEROKU_URL(state, payload){
+    //     state.heroku_url = payload;
+    // }
 }
 const actions = {
     async getMemberData({commit}) {
@@ -20,13 +20,13 @@ const actions = {
             })
             .catch((error) => console.log(error))
     },
-    async getHerokuUrl({commit}) {
-        await axios.get(`/HerokuUrl`)
-            .then((response) => {
-                commit('SET_HEROKU_URL', response.data)
-            })
-            .catch((error) => console.log(error))
-    },
+    // async getHerokuUrl({commit}) {
+    //     await axios.get(`/HerokuUrl`)
+    //         .then((response) => {
+    //             commit('SET_HEROKU_URL', response.data)
+    //         })
+    //         .catch((error) => console.log(error))
+    // },
     // eslint-disable-next-line no-unused-vars
     async chgAreaData({commit}, user) {
         if (!user.name) {

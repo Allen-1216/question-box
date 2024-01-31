@@ -21,7 +21,8 @@ const options = {
       },
       servers: [
         {
-          url: process.env.DATABASE_URL + ":" + process.env.PORT,
+          url: window.location.origin + ":" + process.env.PORT,
+          //url: process.env.DATABASE_URL + ":" + process.env.PORT,
           description: 'Development server',
         },
         {

@@ -126,7 +126,7 @@
           <img class="copy-url-img" src="@/assets/image/link-45deg.svg">
         </span>
         <br>
-        <a id="CopyUrl" :href="heroku_url.data + '/messageboardpage/' + member_data.account" class="link-dark" target="_blank">{{heroku_url.data}}/messageboardpage/{{member_data.account}}</a>
+        <a id="CopyUrl" :href="window.location.origin + '/messageboardpage/' + member_data.account" class="link-dark" target="_blank">{{window.location.origin}}/messageboardpage/{{member_data.account}}</a>
       </div>
     </div>
     <div class="col"></div>
@@ -139,7 +139,6 @@ import NavbarLogin from "@/components/NavbarLogin";
 export default {
   data() {
     const user = {
-      // account: "",
       name: "",
       email: "",
       introduction: "",
@@ -151,14 +150,14 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch('getMemberData'),
-    this.$store.dispatch('getHerokuUrl')
+    this.$store.dispatch('getMemberData')
+    //this.$store.dispatch('getHerokuUrl')
   },
   name: "MemberAreaData",
   components: {NavbarLogin},
   computed:{
     ...mapGetters([
-      'member_data','heroku_url'
+      'member_data'//,'heroku_url'
     ])
   },
   methods: {
