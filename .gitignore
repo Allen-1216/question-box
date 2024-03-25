@@ -2,9 +2,6 @@
 .husky
 /node_modules
 /dist
-# /helpers
-server.js
-# swagger.js
 package-lock.json
 
 
