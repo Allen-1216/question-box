@@ -1,19 +1,18 @@
 const ApiError = require('../error/ApiError')
 
-function apiErrorHandler (err, req, res) {
+// eslint-disable-next-line
+function apiErrorHandler (error, req, res, next) {
     //in prod don't use console.log or console.err because
     //it is not async
     //console.error(err)
 
-    if(err instanceof ApiError){
-        res.status(err.code).json(err.message);
-        return;
+    if (error instanceof ApiError) {
+        return res.status(error.code).json({HTTP_Status: error.code , message: error.message, error: error.error, state: error.state});
     }
-    if(err.status === 404){
-        res.status(404).json('API not found');
-        return;
+    if (error.status === 404) {
+        return res.status(404).json({ error: 'API not found' });
     }
-    res.status(500).json('something went wrong')
+    return res.status(500).json({ error: 'Something went wrong' });
 }
 
 module.exports = apiErrorHandler;

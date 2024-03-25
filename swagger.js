@@ -21,8 +21,7 @@ const options = {
       },
       servers: [
         {
-          url: "https://question-box-7e446f16ba95.herokuapp.com", // + process.env.PORT
-          //url: process.env.DATABASE_URL + ":" + process.env.PORT,
+          url: "https://question-box-7e446f16ba95.herokuapp.com",
           description: 'Development server',
         },
         {
