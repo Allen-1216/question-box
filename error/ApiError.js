@@ -1,9 +1,7 @@
 class ApiError{
-    constructor(code, message, error, state) {
+    constructor(code, message) {
         this.code = code;
         this.message = message;
-        this.error = error;
-        this.state = state;
     }
     //無效的請求訊息或欺騙性路由請求
     static BadRequest(msg){
@@ -11,7 +9,7 @@ class ApiError{
     }
     //未認證，即使用者沒有必要的憑據
     static Unauthorized(){
-        return new ApiError(401, '請先登入', 'No data found for the session', 'failed');
+        return new ApiError(401, '請先登入');
     }
     //請求失敗，請求所希望得到的資源未被在伺服器上發現
     static NotFound(){

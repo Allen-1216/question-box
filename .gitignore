@@ -1,9 +1,9 @@
 .DS_Store
 .husky
 /node_modules
-# /dist
+/dist
 # /helpers
-# server.js
+server.js
 # swagger.js
 package-lock.json
 

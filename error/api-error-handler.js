@@ -7,7 +7,7 @@ function apiErrorHandler (error, req, res, next) {
     //console.error(err)
 
     if (error instanceof ApiError) {
-        return res.status(error.code).json({HTTP_Status: error.code , message: error.message, error: error.error, state: error.state});
+        return res.status(error.code).json({HTTP_Status: error.code , message: error.message});
     }
     if (error.status === 404) {
         return res.status(404).json({ error: 'API not found' });
