@@ -8,8 +8,8 @@ class ApiError{
         return new ApiError(400, msg);
     }
     //未認證，即使用者沒有必要的憑據
-    static Unauthorized(){
-        return new ApiError(401, '請先登入');
+    static Unauthorized(msg){
+        return new ApiError(401, msg);
     }
     //請求失敗，請求所希望得到的資源未被在伺服器上發現
     static NotFound(){

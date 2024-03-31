@@ -8,8 +8,8 @@ const MySQLStore = require('express-mysql-session')(session)
 const bcrypt = require('bcrypt') // hashing library
 const swaggerDocs = require('./swagger.js')
 const saltRounds = 10;
-const mysql = require('mysql');
-//const ApiError = require('./error/ApiError')
+const mysql = require('mysql2');
+
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
@@ -17,7 +17,7 @@ app.use(express.json())
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
-
+  
 //swagger 生成API文件
 swaggerDocs(app)
 
@@ -85,7 +85,7 @@ app.get('/user', (req, res, next) => {
             //     error: 'No data found for the session'
             // })
             // return;
-            throw ApiError.Unauthorized();
+            throw ApiError.Unauthorized('請先登入');
         }
         const userId = req.session.userId
         connection.query('select `account`, `name`, `email`, `introduction`, `avatar` from question_box_member_data where `uid` = ? ',
@@ -143,7 +143,7 @@ app.patch('/user', (req, res, next) => {
     //eslint-disable-next-line
     const emailRegex = /[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*/;
     if(req.session.loggedin !== true) {
-        throw ApiError.Unauthorized();
+        throw ApiError.Unauthorized('請先登入');
     }
     if(email && !emailRegex.test(email)) {
         throw ApiError.BadRequest('請輸入有效的電子信箱');
@@ -238,7 +238,7 @@ app.get('/user/loginStatus', (req, res) => {
  */
 app.get('/user/letterbox', (req, res, next) => {
     if(req.session.loggedin !== true) {
-        throw ApiError.Unauthorized();
+        throw ApiError.Unauthorized('請先登入');
     }
     const account = req.session.account
     connection.query('select * from question_box_message_data where `account` = ?',
@@ -278,7 +278,7 @@ app.get('/user/letterbox', (req, res, next) => {
  */
 app.post('/user/letterbox', (req, res, next) =>{
     if(req.session.loggedin !== true) {
-        throw ApiError.Unauthorized();
+        throw ApiError.Unauthorized('請先登入');
     }
     const account = req.body.account;
     const datetime = new Date();
@@ -326,7 +326,7 @@ app.post('/user/letterbox', (req, res, next) =>{
  */
 app.delete('/user/letterbox', (req, res, next) =>{
     if(req.session.loggedin !== true) {
-        throw ApiError.Unauthorized();
+        throw ApiError.Unauthorized('請先登入');
     }
     const mid = req.body.mid;
     connection.query('delete from question_box_message_data where `mid` = ?',[mid], function (err){
@@ -363,7 +363,7 @@ app.delete('/user/letterbox', (req, res, next) =>{
  */
 app.get('/user/bookmark', (req, res, next) => {
     if(req.session.loggedin !== true) {
-        throw ApiError.Unauthorized();
+        throw ApiError.Unauthorized('請先登入');
     }
     const account = req.session.account
     connection.query('select mc.`cid`, ma.`mid`, ma.account, ma.content_time, ma.sender_account, ma.sender_name, ma.content\n' +
@@ -386,17 +386,13 @@ app.get('/user/bookmark', (req, res, next) => {
 // 收藏"查看信箱"訊息
 app.post('/user/bookmark', (req, res, next) =>{
     if(req.session.loggedin !== true) {
-        throw ApiError.Unauthorized();
+        throw ApiError.Unauthorized('請先登入');
     }
     const account = req.body.account;
     const article_id = req.body.article_id;
     const datetime = new Date();
     if(!article_id){
-        res.status(400).json({
-            state: "failed",
-            message: "文章已被刪除"
-        })
-        return;
+        throw ApiError.BadRequest('文章已被刪除');
     }
     connection.query('select * from question_box_message_collections where `user_account` = ? and `article_id` = ?',
         [account, article_id], function (err, results) {
@@ -426,7 +422,7 @@ app.post('/user/bookmark', (req, res, next) =>{
 // 刪除"收藏的問題"的訊息
 app.delete('/user/bookmark', (req, res, next) => {
     if(req.session.loggedin !== true) {
-        throw ApiError.Unauthorized();
+        throw ApiError.Unauthorized('請先登入');
     }
     const cid = req.body.cid;
     connection.query('delete from question_box_message_collections where `cid` = ?',[cid], function (err){
@@ -471,12 +467,7 @@ app.post('/signup', (req, res, next) => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}$/; //至少含1數字英文大小寫且長度介於8-30
     // 內容不可為空
     if (!username || !password || !confirmPassword) {
-        res.status(400).json({
-            state:"failed",
-            message:"欄位不可為空"
-        })
-        // next(ApiError.badRequest('msg field is required and must be mon blank'));
-        return;
+        throw ApiError.BadRequest('欄位不可為空');
     }
     // 密碼不一致
     else if(password !== confirmPassword) {
@@ -611,4 +602,4 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-//connection.end() // 關閉資料庫
+//connection.end() // 關閉與資料庫的連線
