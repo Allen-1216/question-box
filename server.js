@@ -3,10 +3,11 @@ const apiErrorHandler = require('./error/api-error-handler')
 const ApiError = require('./error/ApiError');
 const app = express()
 const session = require('express-session')
-const port = process.env.PORT || 80;
+//const port = process.env.PORT || 80;
+const port = 3000;
 const MySQLStore = require('express-mysql-session')(session)
 const bcrypt = require('bcrypt') // hashing library
-const swaggerDocs = require('./swagger.js')
+const swaggerDocs = require('./swagger/swagger.js')
 const saltRounds = 10;
 const mysql = require('mysql2');
 

@@ -2,19 +2,15 @@ import axios from 'axios';
 
 const state = {
     member_data: {}
-    //heroku_url:{},
 }
 const mutations = {
     SET_MEMBER_DATA(state, payload){
         state.member_data = payload.data;
     },
-    // SET_HEROKU_URL(state, payload){
-    //     state.heroku_url = payload;
-    // }
 }
 const actions = {
     async getMemberData({commit}) {
-        await axios.get(`/user`)
+        await axios.get(`/api/user`)
             .then((response) => {
                 commit('SET_MEMBER_DATA', response.data)
             })
@@ -41,7 +37,7 @@ const actions = {
         if (!user.avatar) {
             user.avatar = null;
         }
-        await axios.patch(`/user`, {
+        await axios.patch(`/api/user`, {
             name: user.name,
             email: user.email,
             introduction: user.introduction,

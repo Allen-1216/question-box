@@ -2,8 +2,8 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
 //const schemas = require('./helpers/swagger-schemas-helper')
-const responses = require('./helpers/swagger-responses-helper')
-const requestBodies = require('./helpers/swagger-requestBodies-helper')
+const responses = require('./swagger-responses-helper')
+const requestBodies = require('./swagger-requestBodies-helper')
 
 //定義 swagger-jsdoc 的 options
 const options = {
@@ -21,7 +21,7 @@ const options = {
       },
       servers: [
         {
-          url: "https://question-box-7e446f16ba95.herokuapp.com",
+          url: "http://localhost:3000/",
           description: 'Development server',
         },
         {

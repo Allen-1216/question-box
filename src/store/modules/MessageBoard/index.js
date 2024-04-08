@@ -15,7 +15,7 @@ const actions = {
         const matches = path.match(regex);
         if (matches) {
             const account = matches[1];
-            await axios.get(`/user/${account}`)
+            await axios.get(`/api/user/${account}`)
                 .then((response) => {
                     commit('SET_MESSAGE_BOARD_DATA', response.data)
                 })
@@ -24,7 +24,7 @@ const actions = {
     },
     //eslint-disable-next-line
     async addContent({commit}, contentDetail){
-        await axios.post('/user/letterbox',{
+        await axios.post('/api/user/letterbox',{
             account: contentDetail.account,
             content: contentDetail.input,
             sender_name: contentDetail.sender_name,

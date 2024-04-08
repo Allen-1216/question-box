@@ -55,7 +55,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     // 當路由物件的 meta 設有 requiresAuth 時
     if(to.matched.some(record => record.meta.requiresAuth)) {
-        axios.get(`/user/loginStatus`) //查詢登入狀態
+        axios.get(`/api/user/loginStatus`) //查詢登入狀態
             .then((response) => {
                 // console.log("是否登入", response.data.state === "success")
                 if (response.data.state !== "success" && name !== 'home') {

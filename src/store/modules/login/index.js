@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
-import router from  "@/router"
 
 const state = {
     is_logged_in : {}
@@ -12,7 +11,7 @@ const mutations = {
 }
 const actions = {
     async logIn({commit}, user) {
-        await axios.post(`/login`, {
+        await axios.post(`/api/login`, {
             username: user.username,
             password: user.password,
         })
@@ -28,7 +27,7 @@ const actions = {
         .catch((error) => alert(error.response.data.message))
     },
     async logOut(){
-        await axios.post(`/logout`)
+        await axios.post(`/api/logout`)
             .then((response) => {
                 if(response.data.state === "success"){
                     let url = location.href;
@@ -42,14 +41,14 @@ const actions = {
             .catch((error) => console.log(error))
     },
     async isLoggedIn({commit}){
-        await axios.get(`/user/loginStatus`)
+        await axios.get(`/api/user/loginStatus`)
             .then((response) => {
                 commit('IS_LOGGED_IN', response.data.state === "success")
             })
             .catch((error) => console.log(error))
     },
     async signUp({commit}, user) {
-        await axios.post(`/signup`, {
+        await axios.post(`/api/signup`, {
             username: user.username,
             password: user.password,
             confirmPassword: user.confirmPassword,

@@ -10,7 +10,7 @@ const mutations = {
 }
 const actions = {
     async getContent ({commit}) {
-        await axios.get(`/user/letterbox`)
+        await axios.get(`/api/user/letterbox`)
             .then((response) => {
                 //處理UTC時區問題 依照本地調整
                 const resData = response.data.data.map(message => {
@@ -23,7 +23,7 @@ const actions = {
     },
     //eslint-disable-next-line
     async deleteContent({commit}, mid) {
-        await axios.delete(`/user/letterbox`,{data:{
+        await axios.delete(`/api/user/letterbox`,{data:{
             mid: mid,
         }}).then((response) => {
             if(response.data.state === "success"){
@@ -37,7 +37,7 @@ const actions = {
     },
     //eslint-disable-next-line
     async addBookmarkContent({commit}, bookmarkContentDetail){
-        await axios.post('/user/bookmark',{
+        await axios.post('/api/user/bookmark',{
             account: bookmarkContentDetail.account,
             article_id: bookmarkContentDetail.article_id,
         }).then((response) => {
